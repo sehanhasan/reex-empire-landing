@@ -1,22 +1,42 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { services } from "./services/data/servicesData";
+import { toast } from "sonner";
 
 export const Services = () => {
   const handleRequestService = (serviceName: string) => {
+    console.log('Requesting service:', serviceName);
+    
     // Find the quote section
     const quoteSection = document.querySelector('#get-a-quote');
-    if (quoteSection) {
-      // Find the service select element
-      const serviceSelect = quoteSection.querySelector('select') as HTMLSelectElement;
-      if (serviceSelect) {
-        // Set the value to the selected service
-        serviceSelect.value = serviceName.toLowerCase();
-        // Trigger change event to update the select component's UI
-        serviceSelect.dispatchEvent(new Event('change', { bubbles: true }));
-      }
+    if (!quoteSection) {
+      console.error('Quote section not found');
+      return;
+    }
+
+    // Find the service select element
+    const serviceSelect = document.querySelector('[name="service"]') as HTMLSelectElement;
+    if (!serviceSelect) {
+      console.error('Service select not found');
+      return;
+    }
+
+    try {
+      // Set the value to the selected service
+      serviceSelect.value = serviceName.toLowerCase();
+      
+      // Trigger change event to update the select component's UI
+      const event = new Event('change', { bubbles: true });
+      serviceSelect.dispatchEvent(event);
+      
       // Scroll to the quote section
       quoteSection.scrollIntoView({ behavior: 'smooth' });
+      
+      toast.success(`Selected service: ${serviceName}`);
+      console.log('Service selected successfully:', serviceName);
+    } catch (error) {
+      console.error('Error selecting service:', error);
+      toast.error('Failed to select service. Please try again.');
     }
   };
 
