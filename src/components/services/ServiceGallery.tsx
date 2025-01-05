@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface ServiceGalleryProps {
   images: string[];
@@ -38,7 +40,7 @@ export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) =>
             onClick={() => setSelectedImageIndex(index)}
           >
             <img 
-              src={`${image}?auto=format&fit=crop&q=80`}
+              src={image}
               alt={`${serviceTitle} gallery image ${index + 1}`}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -51,13 +53,19 @@ export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) =>
       </div>
 
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImageIndex(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 relative bg-transparent border-none">
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 relative bg-black/95 border-none">
+          <DialogTitle className="sr-only">
+            <VisuallyHidden>
+              {`${serviceTitle} Image ${selectedImageIndex !== null ? selectedImageIndex + 1 : ''}`}
+            </VisuallyHidden>
+          </DialogTitle>
+          
           {selectedImage && (
             <>
               <div className="relative w-full h-[80vh] flex items-center justify-center">
                 <img
-                  src={`${selectedImage}?auto=format&fit=crop&q=100`}
-                  alt={serviceTitle}
+                  src={selectedImage}
+                  alt={`${serviceTitle} full view`}
                   className="max-w-full max-h-full object-contain"
                   onClick={(e) => e.stopPropagation()}
                 />
