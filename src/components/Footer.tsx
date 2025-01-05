@@ -6,7 +6,11 @@ export const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
-            <h3 className="text-xl font-bold mb-4">Reex Empire</h3>
+            <img 
+              src="https://i.ibb.co/M28gB6X/Reex-logo.png" 
+              alt="Reex Empire Logo" 
+              className="h-16 mb-4"
+            />
             <p className="text-white/80">
               Transforming spaces and enhancing lives across Kuala Lumpur with expert renovation and maintenance solutions.
             </p>
