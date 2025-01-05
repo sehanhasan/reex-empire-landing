@@ -1,10 +1,10 @@
-import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
     <footer className="bg-[#222222] text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <div className="space-y-3">
@@ -41,20 +41,9 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-white/80 hover:text-white">
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-white/80 hover:text-white">
-                <Instagram className="w-6 h-6" />
-              </a>
-            </div>
-          </div>
         </div>
         <div className="border-t border-white/10 pt-8 text-center text-white/60">
-          <p>&copy; 2024 Reex Empire. All rights reserved.</p>
+          <p>&copy; 2025 Reex Empire. All rights reserved.</p>
         </div>
       </div>
     </footer>
