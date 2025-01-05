@@ -29,17 +29,12 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {["About Us", "Services", "Portfolio", "Contact"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-white/80 hover:text-white">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="flex justify-center items-center">
+            <img 
+              src="https://www.goldmates.com.my/wp-content/uploads/2021/02/best-price-guaranteed.png" 
+              alt="Best Price Guaranteed"
+              className="max-w-[200px] h-auto"
+            />
           </div>
         </div>
         <div className="border-t border-white/10 pt-8 text-center text-white/60">

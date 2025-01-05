@@ -60,15 +60,14 @@ export const Services = () => {
                   <p className="text-sm italic text-gray-600 mb-2">"{service.testimonial.text}"</p>
                   <p className="text-sm font-semibold text-gray-800">- {service.testimonial.author}</p>
                 </div>
-                <div className="flex gap-2 mt-4">
+                <div className="flex justify-between items-center mt-4">
                   <Button variant="link" className="text-primary p-0" asChild>
                     <Link to={`/services/${service.title.toLowerCase().replace(/[&\s]+/g, '-')}`}>
                       Learn More
                     </Link>
                   </Button>
                   <Button 
-                    variant="secondary"
-                    className="text-primary"
+                    className="bg-[#00d0f7] text-white hover:bg-[#00b8dd]"
                     onClick={() => handleRequestService(service.title)}
                   >
                     Request Service
