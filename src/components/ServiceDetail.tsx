@@ -7,7 +7,7 @@ import { ServiceTestimonials } from './services/ServiceTestimonials';
 import { serviceGalleryImages, serviceTestimonials } from './services/data/servicesData';
 
 export const ServiceDetail = () => {
-  const { serviceId } = useParams();
+  const { serviceId } = useParams<{ serviceId: string }>();
   const service = services.find(s => {
     const slug = s.title.toLowerCase().replace(/[&\s]+/g, '-');
     return slug === serviceId;
@@ -24,8 +24,9 @@ export const ServiceDetail = () => {
     );
   }
 
-  const galleryImages = serviceGalleryImages[serviceId as keyof typeof serviceGalleryImages] || [];
-  const testimonials = serviceTestimonials[serviceId as keyof typeof serviceTestimonials] || [];
+  const slug = service.title.toLowerCase().replace(/[&\s]+/g, '-');
+  const galleryImages = serviceGalleryImages[slug] || [];
+  const testimonials = serviceTestimonials[slug] || [];
 
   return (
     <div className="container mx-auto px-4 pt-8 pb-20 md:py-20">
