@@ -100,21 +100,24 @@ export const Contact = () => {
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
             />
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {services.map((service) => (
-                <button
-                  key={service.title}
-                  type="button"
-                  onClick={() => toggleService(service.title)}
-                  className={`p-2 rounded border ${
-                    formData.services.includes(service.title)
-                      ? 'bg-secondary text-secondary-foreground'
-                      : 'bg-white/10 border-white/20'
-                  } transition-colors`}
-                >
-                  {service.title}
-                </button>
-              ))}
+            <div className="space-y-2">
+              <label className="block text-lg font-medium">Select Service</label>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {services.map((service) => (
+                  <button
+                    key={service.title}
+                    type="button"
+                    onClick={() => toggleService(service.title)}
+                    className={`p-2 rounded border ${
+                      formData.services.includes(service.title)
+                        ? 'bg-secondary text-secondary-foreground'
+                        : 'bg-white/10 border-white/20'
+                    } transition-colors`}
+                  >
+                    {service.title}
+                  </button>
+                ))}
+              </div>
             </div>
             <Textarea
               placeholder="Description"
