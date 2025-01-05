@@ -80,7 +80,7 @@ export const Contact = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
                 placeholder="Your Name"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40"
                 required
                 value={formData.name}
                 onChange={(e) => handleChange(e, 'name')}
@@ -88,7 +88,7 @@ export const Contact = () => {
               <Input
                 type="email"
                 placeholder="Email Address"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40"
                 required
                 value={formData.email}
                 onChange={(e) => handleChange(e, 'email')}
@@ -96,7 +96,7 @@ export const Contact = () => {
             </div>
             <Input
               placeholder="Phone Number"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40"
               required
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
@@ -106,7 +106,7 @@ export const Contact = () => {
               value={formData.service}
               onValueChange={(value) => handleChange(value, 'service')}
             >
-              <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-[42px]">
+              <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 h-[42px]">
                 <SelectValue placeholder="Select a service" />
               </SelectTrigger>
               <SelectContent className="bg-white text-gray-900">
@@ -123,7 +123,7 @@ export const Contact = () => {
             </Select>
             <Textarea
               placeholder="Description"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px] resize-none"
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 min-h-[120px] resize-none"
               required
               value={formData.description}
               onChange={(e) => handleChange(e, 'description')}
