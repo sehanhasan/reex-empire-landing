@@ -86,7 +86,7 @@ export const WhyChooseUs = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="text-center bg-white/10 backdrop-blur-sm p-6 rounded-lg"
+                className="text-center bg-white/10 backdrop-blur-xl p-6 rounded-lg"
               >
                 <div className="flex justify-center items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
