@@ -2,19 +2,9 @@ import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-primary text-white pt-16 pb-8">
+    <footer className="bg-[#222222] text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <div>
-            <img 
-              src="https://i.ibb.co/M28gB6X/Reex-logo.png" 
-              alt="Reex Empire Logo" 
-              className="h-16 mb-4"
-            />
-            <p className="text-white/80">
-              Transforming spaces and enhancing lives across Kuala Lumpur with expert renovation and maintenance solutions.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <div className="space-y-3">
