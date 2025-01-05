@@ -22,7 +22,7 @@ export const Specialization = () => {
             We Are Specialized In
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {specializations.map((spec) => (
             <div
               key={spec.title}
@@ -44,6 +44,18 @@ export const Specialization = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="flex justify-center items-center gap-8">
+          <img 
+            src="https://www.goldmates.com.my/wp-content/uploads/2021/02/best-price-guaranteed.png" 
+            alt="Best Price Guaranteed"
+            className="max-w-[200px] h-auto"
+          />
+          <img 
+            src="https://tvsolutions.ie/wp-content/uploads/2018/12/guarantee.png" 
+            alt="100% Satisfaction Guaranteed"
+            className="max-w-[200px] h-auto"
+          />
         </div>
       </div>
     </section>
