@@ -43,16 +43,6 @@ export const ServiceDetail = () => {
           <p className="text-lg text-gray-700 mb-8">{service.description}</p>
           
           <ServiceTestimonials testimonials={testimonials} />
-
-          <div className="flex justify-end">
-            <Button 
-              asChild 
-              size="lg"
-              className="bg-[#00d0f7] text-white hover:bg-[#00d0f7]/90"
-            >
-              <Link to="/contact">Request a Quote</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </div>
