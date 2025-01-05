@@ -5,6 +5,21 @@ import { toast } from "@/components/ui/use-toast";
 
 export const Services = () => {
   const handleRequestService = (serviceName: string) => {
+    // Find the quote section
+    const quoteSection = document.querySelector('#get-a-quote');
+    if (quoteSection) {
+      // Find the service select element
+      const serviceSelect = quoteSection.querySelector('select') as HTMLSelectElement;
+      if (serviceSelect) {
+        // Set the value to the selected service
+        serviceSelect.value = serviceName.toLowerCase();
+        // Trigger change event to update the select component's UI
+        serviceSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      // Scroll to the quote section
+      quoteSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
     toast({
       title: "Service Request",
       description: `Your request for ${serviceName} service has been received. We'll contact you soon!`,
