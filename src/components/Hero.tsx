@@ -12,7 +12,7 @@ export const Hero = () => {
   const slides = [
     {
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80",
-      title: "#1 Renovation, Construction & Remodeling Services in Kuala Lumpur",
+      title: <span><span className="text-[#00d0f7]">Renovation, Construction & Remodeling</span> Services in Kuala Lumpur</span>,
       subtitle: "Call us at 011-16-656525 or email reexsb@gmail.com"
     },
     {
