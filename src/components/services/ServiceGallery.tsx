@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogContent,
 } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ServiceGalleryProps {
   images: string[];
@@ -10,7 +11,22 @@ interface ServiceGalleryProps {
 }
 
 export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const selectedImage = selectedImageIndex !== null ? images[selectedImageIndex] : null;
+
+  const handlePrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
+    }
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    }
+  };
 
   return (
     <>
@@ -19,7 +35,7 @@ export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) =>
           <div 
             key={index}
             className="relative h-64 rounded-lg overflow-hidden hover:opacity-90 transition-opacity cursor-pointer"
-            onClick={() => setSelectedImage(image)}
+            onClick={() => setSelectedImageIndex(index)}
           >
             <img 
               src={`${image}?auto=format&fit=crop&q=80`}
@@ -34,15 +50,31 @@ export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) =>
         ))}
       </div>
 
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0">
+      <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImageIndex(null)}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 relative">
           {selectedImage && (
-            <img
-              src={`${selectedImage}?auto=format&fit=crop&q=100`}
-              alt={serviceTitle}
-              className="w-full h-full object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <>
+              <img
+                src={`${selectedImage}?auto=format&fit=crop&q=100`}
+                alt={serviceTitle}
+                className="w-full h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                onClick={handlePrevious}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6 text-white" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6 text-white" />
+              </button>
+            </>
           )}
         </DialogContent>
       </Dialog>
