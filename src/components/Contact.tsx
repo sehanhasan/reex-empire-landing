@@ -17,9 +17,18 @@ export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    area: "",
     services: [] as string[],
     description: "",
   });
+
+  const areas = [
+    "Kuala Lumpur",
+    "Petaling Jaya",
+    "Subang Jaya",
+    "Shah Alam",
+    "Klang"
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +38,7 @@ export const Contact = () => {
       `*New Quote Request*\n\n` +
       `*Name:* ${formData.name}\n` +
       `*Phone:* ${formData.phone}\n` +
+      `*Area:* ${formData.area}\n` +
       `*Services:* ${formData.services.join(", ")}\n` +
       `*Description:* ${formData.description}`
     );
@@ -100,8 +110,23 @@ export const Contact = () => {
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
             />
+            <Select
+              value={formData.area}
+              onValueChange={(value) => handleChange(value, 'area')}
+            >
+              <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                <SelectValue placeholder="Select Area" />
+              </SelectTrigger>
+              <SelectContent>
+                {areas.map((area) => (
+                  <SelectItem key={area} value={area}>
+                    {area}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <div className="space-y-2">
-              <label className="block text-lg font-medium">Select Service</label>
+              <label className="block text-base font-medium">Select Service</label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {services.map((service) => (
                   <button
