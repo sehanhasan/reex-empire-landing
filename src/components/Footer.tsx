@@ -8,18 +8,25 @@ export const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
             <div className="space-y-3">
-              <a href="tel:+60123456789" className="flex items-center gap-2 text-white/80 hover:text-white">
-                <Phone className="w-4 h-4" />
-                +60 12-345 6789
-              </a>
-              <a href="mailto:info@reexempire.com" className="flex items-center gap-2 text-white/80 hover:text-white">
-                <Mail className="w-4 h-4" />
-                info@reexempire.com
-              </a>
-              <div className="flex items-center gap-2 text-white/80">
-                <MapPin className="w-4 h-4" />
-                Kuala Lumpur, Malaysia
+              <div className="text-white/80">
+                Reex Empire Sdn Bhd (1426553-A)
               </div>
+              <div className="flex items-start gap-2 text-white/80">
+                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                <div>
+                  No. 29-1, Jalan 2A/6,<br />
+                  Taman Setapak Indah,<br />
+                  53300 Setapak, Kuala Lumpur
+                </div>
+              </div>
+              <a href="tel:01116656525" className="flex items-center gap-2 text-white/80 hover:text-white">
+                <Phone className="w-4 h-4" />
+                011-16-656525
+              </a>
+              <a href="mailto:reexsb@gmail.com" className="flex items-center gap-2 text-white/80 hover:text-white">
+                <Mail className="w-4 h-4" />
+                reexsb@gmail.com
+              </a>
             </div>
           </div>
           <div>
