@@ -2,6 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { services } from "./services/data/servicesData";
 
 export const Contact = () => {
   const { toast } = useToast();
@@ -42,6 +50,18 @@ export const Contact = () => {
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
             required
           />
+          <Select required>
+            <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50">
+              <SelectValue placeholder="Select a service" />
+            </SelectTrigger>
+            <SelectContent>
+              {services.map((service) => (
+                <SelectItem key={service.title} value={service.title.toLowerCase()}>
+                  {service.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <Textarea
             placeholder="Tell us about your project"
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px]"
