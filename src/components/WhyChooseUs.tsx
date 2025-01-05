@@ -3,17 +3,17 @@ import { Clock, Award, BadgeDollarSign } from "lucide-react";
 export const WhyChooseUs = () => {
   const features = [
     {
-      icon: <Clock className="w-16 h-16 text-primary" />,
+      icon: <Clock className="w-16 h-16 text-white" />,
       title: "Guaranteed Fast & Efficiency",
       description: "Quick turnaround times without compromising on quality"
     },
     {
-      icon: <Award className="w-16 h-16 text-primary" />,
+      icon: <Award className="w-16 h-16 text-white" />,
       title: "Best Quality & Services",
       description: "Premium workmanship and exceptional customer service"
     },
     {
-      icon: <BadgeDollarSign className="w-16 h-16 text-primary" />,
+      icon: <BadgeDollarSign className="w-16 h-16 text-white" />,
       title: "Affordable & Reasonable Price",
       description: "Competitive pricing without hidden costs"
     }
@@ -41,38 +41,50 @@ export const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-8 md:py-16 bg-accent">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-4xl font-bold text-primary mb-4">Why Choose Reex Empire?</h2>
-          <p className="text-2xl text-gray-600 mb-8">It's Simple!</p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+    <section className="relative py-20">
+      {/* Parallax Background with Dark Overlay */}
+      <div 
+        className="absolute inset-0 bg-fixed z-0"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">Why Choose Reex Empire?</h2>
+          <p className="text-2xl text-white/90 mb-8">It's Simple!</p>
+          <p className="text-lg text-white/80 max-w-3xl mx-auto">
             We provide one stop & full range of renovation services to our customers. So you just have to sit back and relax!
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-16">
+        <div className="grid md:grid-cols-3 gap-12 md:gap-8 mb-20">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow animate-fadeIn"
+              className="text-center"
             >
-              <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600 text-center">{feature.description}</p>
+              <div className="flex justify-center mb-6">{feature.icon}</div>
+              <h3 className="text-2xl font-semibold mb-4 text-white">{feature.title}</h3>
+              <p className="text-white/80">{feature.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 md:mt-16">
-          <h3 className="text-3xl font-bold text-center mb-12">What Our Clients Say</h3>
+        <div className="mt-20">
+          <h3 className="text-3xl font-bold text-center text-white mb-12">What Our Clients Say</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="text-center bg-white/10 backdrop-blur-sm p-6 rounded-lg"
               >
-                <div className="flex items-center mb-4">
+                <div className="flex justify-center items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <svg
                       key={i}
@@ -84,9 +96,9 @@ export const WhyChooseUs = () => {
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4 italic">"{testimonial.content}"</p>
-                <div className="font-semibold">{testimonial.name}</div>
-                <div className="text-sm text-gray-500">{testimonial.role}</div>
+                <p className="text-white/90 mb-4 italic">"{testimonial.content}"</p>
+                <div className="font-semibold text-white">{testimonial.name}</div>
+                <div className="text-sm text-white/70">{testimonial.role}</div>
               </div>
             ))}
           </div>
