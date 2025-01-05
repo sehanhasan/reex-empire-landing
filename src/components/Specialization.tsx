@@ -1,4 +1,6 @@
 import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Shield, DollarSign } from "lucide-react";
 
 export const Specialization = () => {
   const specializations = [
@@ -21,8 +23,18 @@ export const Specialization = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             We Are Specialized In
           </h2>
+          <div className="flex justify-center gap-4 mb-8">
+            <Badge variant="secondary" className="px-4 py-2 flex items-center gap-2">
+              <DollarSign className="w-4 h-4" />
+              Best Price Guarantee
+            </Badge>
+            <Badge variant="secondary" className="px-4 py-2 flex items-center gap-2">
+              <Shield className="w-4 h-4" />
+              100% Satisfaction
+            </Badge>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {specializations.map((spec) => (
             <div
               key={spec.title}
@@ -44,18 +56,6 @@ export const Specialization = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="flex justify-center items-center gap-8">
-          <img 
-            src="https://www.goldmates.com.my/wp-content/uploads/2021/02/best-price-guaranteed.png" 
-            alt="Best Price Guaranteed"
-            className="max-w-[200px] h-auto"
-          />
-          <img 
-            src="https://tvsolutions.ie/wp-content/uploads/2018/12/guarantee.png" 
-            alt="100% Satisfaction Guaranteed"
-            className="max-w-[200px] h-auto"
-          />
         </div>
       </div>
     </section>
