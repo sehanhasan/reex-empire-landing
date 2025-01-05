@@ -51,12 +51,16 @@ export const Contact = () => {
             required
           />
           <Select required>
-            <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50">
+            <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-[42px]">
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white text-gray-900">
               {services.map((service) => (
-                <SelectItem key={service.title} value={service.title.toLowerCase()}>
+                <SelectItem 
+                  key={service.title} 
+                  value={service.title.toLowerCase()}
+                  className="hover:bg-gray-100 cursor-pointer"
+                >
                   {service.title}
                 </SelectItem>
               ))}
@@ -64,13 +68,13 @@ export const Contact = () => {
           </Select>
           <Textarea
             placeholder="Tell us about your project"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px]"
+            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px] resize-none"
             required
           />
           <Button
             type="submit"
             size="lg"
-            className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+            className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground transition-all duration-200 h-[42px]"
           >
             Request Quote
           </Button>
