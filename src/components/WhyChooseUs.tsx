@@ -70,7 +70,7 @@ export const WhyChooseUs = () => {
               className="text-center"
             >
               <div className="flex justify-center mb-6">{feature.icon}</div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">{feature.title}</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-[#00d0f7]">{feature.title}</h3>
               <p className="text-white/80">{feature.description}</p>
             </div>
           ))}
