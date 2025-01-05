@@ -7,6 +7,7 @@ import { Navigation } from "./components/Navigation";
 import { ServiceDetail } from "./components/ServiceDetail";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             </Routes>
           </main>
           <Footer />
+          <WhatsAppButton />
         </div>
       </BrowserRouter>
     </TooltipProvider>
