@@ -114,12 +114,16 @@ export const Contact = () => {
               value={formData.area}
               onValueChange={(value) => handleChange(value, 'area')}
             >
-              <SelectTrigger className="bg-white/10 border-white/20 text-white">
+              <SelectTrigger className="bg-white/10 border-white/20 text-white h-[42px] focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
                 <SelectValue placeholder="Select Area" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white text-gray-900 border-none shadow-lg">
                 {areas.map((area) => (
-                  <SelectItem key={area} value={area}>
+                  <SelectItem 
+                    key={area} 
+                    value={area}
+                    className="focus:bg-gray-100 cursor-pointer hover:bg-gray-100"
+                  >
                     {area}
                   </SelectItem>
                 ))}
