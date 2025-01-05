@@ -1,13 +1,6 @@
 import { Button } from "./ui/button";
 import { Link, useParams } from "react-router-dom";
 import { services } from "./Services";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 // Gallery images for each service
 const serviceGalleryImages = {
@@ -53,29 +46,24 @@ export const ServiceDetail = () => {
           </Link>
           <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
           
-          {/* Image Gallery */}
-          <div className="mb-8">
-            <Carousel className="w-full max-w-4xl mx-auto">
-              <CarouselContent>
-                {galleryImages.map((image, index) => (
-                  <CarouselItem key={index}>
-                    <div className="relative h-[400px] rounded-lg overflow-hidden">
-                      <img 
-                        src={`${image}?auto=format&fit=crop&q=80`}
-                        alt={`${service.title} gallery image ${index + 1}`}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const img = e.target as HTMLImageElement;
-                          img.src = service.image;
-                        }}
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-2" />
-              <CarouselNext className="right-2" />
-            </Carousel>
+          {/* Image Gallery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {galleryImages.map((image, index) => (
+              <div 
+                key={index}
+                className="relative h-64 rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
+              >
+                <img 
+                  src={`${image}?auto=format&fit=crop&q=80`}
+                  alt={`${service.title} gallery image ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    img.src = service.image;
+                  }}
+                />
+              </div>
+            ))}
           </div>
 
           <p className="text-lg text-gray-700 mb-8">{service.description}</p>
