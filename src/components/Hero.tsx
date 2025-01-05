@@ -10,8 +10,8 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative min-h-[90vh]">
-      <div className="relative h-[90vh] w-full">
+    <div className="relative min-h-[70vh]">
+      <div className="relative h-[70vh] w-full">
         <div 
           className="absolute inset-0 z-0"
           style={{
