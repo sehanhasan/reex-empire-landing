@@ -158,7 +158,7 @@ export const Contact = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-white hover:bg-white/90 text-primary transition-all duration-200 h-[42px]"
+              className="w-full bg-white hover:bg-white/90 text-primary transition-all duration-200 h-[42px] text-sm"
             >
               Request Quote
             </Button>
