@@ -62,7 +62,7 @@ export const Contact = () => {
   return (
     <section id="get-a-quote" className="py-20 bg-primary text-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div>
             <div className="max-w-xl">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Get a Free Quote</h2>
