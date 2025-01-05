@@ -1,5 +1,4 @@
 import { Wrench, Hammer, Palette, PaintBucket, PenLine, HardHat, Construction, Wind } from "lucide-react";
-import { serviceImages } from './images';
 import type { LucideIcon } from 'lucide-react';
 
 export interface ServiceData {
@@ -85,7 +84,7 @@ export const services: ServiceData[] = [
     icon: Construction,
     title: "Demolition",
     description: "Professional and safe demolition services",
-    image: serviceImages.demolition.main,
+    image: "https://images.unsplash.com/photo-1626963781637-1766c8542f99",
     testimonial: {
       text: "Efficient and safe demolition work with proper cleanup.",
       author: "John Lim",
@@ -96,7 +95,7 @@ export const services: ServiceData[] = [
     icon: Wind,
     title: "Aircond",
     description: "Air conditioning installation and servicing",
-    image: serviceImages.aircond.main,
+    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4",
     testimonial: {
       text: "Great AC service with professional maintenance!",
       author: "Kamal Ibrahim",

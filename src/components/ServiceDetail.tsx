@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from './ui/button';
-import { services } from './Services';
+import { services } from './services/data/servicesData';
 import { ServiceGallery } from './services/ServiceGallery';
 import { ServiceTestimonials } from './services/ServiceTestimonials';
-import { serviceGalleryImages, serviceTestimonials } from './services/data/servicesData';
+import { serviceGalleryImages } from './services/data/galleryImages';
+import { serviceTestimonials } from './services/data/testimonials';
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -43,8 +44,12 @@ export const ServiceDetail = () => {
           
           <ServiceTestimonials testimonials={testimonials} />
 
-          <div className="flex justify-center">
-            <Button asChild size="lg">
+          <div className="flex justify-end">
+            <Button 
+              asChild 
+              size="lg"
+              className="bg-[#00d0f7] text-white hover:bg-[#00d0f7]/90"
+            >
               <Link to="/contact">Request a Quote</Link>
             </Button>
           </div>

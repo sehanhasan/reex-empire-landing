@@ -30,13 +30,13 @@ export const serviceGalleryImages = {
     'https://images.unsplash.com/photo-1484154218962-a197022b5858'
   ],
   'demolition': [
-    'https://images.unsplash.com/photo-1599619585752-c3edb42a414c',
-    'https://images.unsplash.com/photo-1599619585856-833f3c2c2b81',
-    'https://images.unsplash.com/photo-1599619585944-3c6e33d66159'
+    'https://images.unsplash.com/photo-1626963781637-1766c8542f99',
+    'https://images.unsplash.com/photo-1597465772576-6a53a5a75661',
+    'https://images.unsplash.com/photo-1504307651254-35680f356dfd'
   ],
   'aircond': [
     'https://images.unsplash.com/photo-1621905252507-b35492cc74b4',
-    'https://images.unsplash.com/photo-1614633833026-0820552978b6',
-    'https://images.unsplash.com/photo-1527899161883-3eb074843f34'
+    'https://images.unsplash.com/photo-1527899161883-3eb074843f34',
+    'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff'
   ]
 };
