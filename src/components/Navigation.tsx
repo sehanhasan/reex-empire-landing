@@ -2,7 +2,7 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -28,6 +28,7 @@ const scrollToContact = () => {
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -41,18 +42,29 @@ const MobileNav = () => {
           <Link to="/" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
             Home
           </Link>
-          <div className="flex flex-col gap-2">
-            <span className="px-4 font-medium">Services</span>
-            {services.map((service) => (
-              <Link
-                key={service.path}
-                to={service.path}
-                onClick={() => setIsOpen(false)}
-                className="px-8 py-2 hover:bg-accent rounded-md"
-              >
-                {service.title}
-              </Link>
-            ))}
+          <div className="flex flex-col">
+            <button 
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className="flex items-center justify-between px-4 py-2 hover:bg-accent rounded-md"
+            >
+              <span className="font-medium">Services</span>
+              <ChevronDown className={cn("h-4 w-4 transition-transform", isServicesOpen && "rotate-180")} />
+            </button>
+            <div className={cn(
+              "overflow-hidden transition-all",
+              isServicesOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            )}>
+              {services.map((service) => (
+                <Link
+                  key={service.path}
+                  to={service.path}
+                  onClick={() => setIsOpen(false)}
+                  className="px-8 py-2 hover:bg-accent rounded-md block"
+                >
+                  {service.title}
+                </Link>
+              ))}
+            </div>
           </div>
           <Link to="/about" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
             About
