@@ -16,9 +16,8 @@ export const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    service: "",
+    services: [] as string[],
     description: "",
   });
 
@@ -29,9 +28,8 @@ export const Contact = () => {
     const message = encodeURIComponent(
       `*New Quote Request*\n\n` +
       `*Name:* ${formData.name}\n` +
-      `*Email:* ${formData.email}\n` +
       `*Phone:* ${formData.phone}\n` +
-      `*Service:* ${formData.service}\n` +
+      `*Services:* ${formData.services.join(", ")}\n` +
       `*Description:* ${formData.description}`
     );
 
@@ -48,15 +46,26 @@ export const Contact = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string | string[],
     field: string
   ) => {
-    if (typeof e === 'string') {
+    if (Array.isArray(e)) {
+      setFormData(prev => ({ ...prev, [field]: e }));
+    } else if (typeof e === 'string') {
       setFormData(prev => ({ ...prev, [field]: e }));
     } else {
       const { value } = e.target;
       setFormData(prev => ({ ...prev, [field]: value }));
     }
+  };
+
+  const toggleService = (service: string) => {
+    setFormData(prev => {
+      const services = prev.services.includes(service)
+        ? prev.services.filter(s => s !== service)
+        : [...prev.services, service];
+      return { ...prev, services };
+    });
   };
 
   return (
@@ -77,23 +86,13 @@ export const Contact = () => {
             />
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input
-                placeholder="Your Name"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
-                required
-                value={formData.name}
-                onChange={(e) => handleChange(e, 'name')}
-              />
-              <Input
-                type="email"
-                placeholder="Email Address"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
-                required
-                value={formData.email}
-                onChange={(e) => handleChange(e, 'email')}
-              />
-            </div>
+            <Input
+              placeholder="Your Name"
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+              required
+              value={formData.name}
+              onChange={(e) => handleChange(e, 'name')}
+            />
             <Input
               placeholder="Phone Number"
               className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -101,26 +100,22 @@ export const Contact = () => {
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
             />
-            <Select 
-              required
-              value={formData.service}
-              onValueChange={(value) => handleChange(value, 'service')}
-            >
-              <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 h-[42px]">
-                <SelectValue placeholder="Select a service" />
-              </SelectTrigger>
-              <SelectContent className="bg-white text-gray-900">
-                {services.map((service) => (
-                  <SelectItem 
-                    key={service.title} 
-                    value={service.title}
-                    className="hover:bg-gray-100 cursor-pointer"
-                  >
-                    {service.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {services.map((service) => (
+                <button
+                  key={service.title}
+                  type="button"
+                  onClick={() => toggleService(service.title)}
+                  className={`p-2 rounded border ${
+                    formData.services.includes(service.title)
+                      ? 'bg-secondary text-secondary-foreground'
+                      : 'bg-white/10 border-white/20'
+                  } transition-colors`}
+                >
+                  {service.title}
+                </button>
+              ))}
+            </div>
             <Textarea
               placeholder="Description"
               className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[120px] resize-none"
