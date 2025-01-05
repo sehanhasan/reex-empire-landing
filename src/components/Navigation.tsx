@@ -17,10 +17,10 @@ const services = [
   { title: "Aircond", path: "/services/aircond" }
 ];
 
-const scrollToContact = () => {
-  const contactSection = document.querySelector('#get-a-quote');
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' });
+const scrollToFooter = () => {
+  const footerSection = document.querySelector('footer');
+  if (footerSection) {
+    footerSection.scrollIntoView({ behavior: 'smooth' });
   }
 };
 
@@ -100,7 +100,7 @@ const DesktopNav = () => (
         </NavigationMenuContent>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Button onClick={scrollToContact} variant="default">
+        <Button onClick={scrollToFooter} variant="default">
           Contact Us
         </Button>
       </NavigationMenuItem>
@@ -121,7 +121,7 @@ export const Navigation = () => {
             />
           </Link>
           <div className="flex items-center gap-2">
-            <Button onClick={scrollToContact} variant="default" className="md:hidden">
+            <Button onClick={scrollToFooter} variant="default" className="md:hidden">
               Contact Us
             </Button>
             <DesktopNav />
