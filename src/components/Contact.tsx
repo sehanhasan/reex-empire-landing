@@ -64,7 +64,7 @@ export const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="max-w-xl">
+            <div className="max-w-xl mx-auto flex flex-col justify-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Get a Free Quote</h2>
               <p className="text-white/80 mb-8">
                 Send us the message and we'll get back to you shortly
