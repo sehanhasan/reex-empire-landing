@@ -1,99 +1,16 @@
-import { Wrench, Hammer, Palette, PaintBucket, PenLine, HardHat, Construction, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
-export const services = [
-  {
-    icon: Wrench,
-    title: "Maintenance",
-    description: "Comprehensive maintenance services for your property",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758",
-    testimonial: {
-      text: "Excellent maintenance service that keeps our property in top condition!",
-      author: "David Wong",
-      rating: 5
-    }
-  },
-  {
-    icon: Hammer,
-    title: "Carpentry",
-    description: "Expert carpentry and woodworking solutions",
-    image: "https://images.unsplash.com/photo-1504148455328-c376907d081c",
-    testimonial: {
-      text: "Outstanding carpentry work with great attention to detail.",
-      author: "Sarah Tan",
-      rating: 5
-    }
-  },
-  {
-    icon: Palette,
-    title: "Interior Design",
-    description: "Creative interior design and space planning",
-    image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221",
-    testimonial: {
-      text: "Transformed our space into something truly beautiful!",
-      author: "Linda Chen",
-      rating: 5
-    }
-  },
-  {
-    icon: PaintBucket,
-    title: "Painting",
-    description: "Professional painting services for all surfaces",
-    image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828",
-    testimonial: {
-      text: "Excellent paint job that brightened up our entire home!",
-      author: "Michael Lee",
-      rating: 5
-    }
-  },
-  {
-    icon: PenLine,
-    title: "Plumbing",
-    description: "Complete plumbing solutions and repairs",
-    image: "https://images.unsplash.com/photo-1542013936693-884638332954",
-    testimonial: {
-      text: "Quick and efficient plumbing service!",
-      author: "Raj Kumar",
-      rating: 5
-    }
-  },
-  {
-    icon: HardHat,
-    title: "Renovation",
-    description: "Full-scale renovation and remodeling services",
-    image: "https://images.unsplash.com/photo-1574359886553-7ac247955371",
-    testimonial: {
-      text: "Completely transformed our home with excellent renovation work!",
-      author: "Ahmad Hassan",
-      rating: 5
-    }
-  },
-  {
-    icon: Construction,
-    title: "Demolition",
-    description: "Professional and safe demolition services",
-    image: "https://images.unsplash.com/photo-1590791897393-5f4f1c25dea7",
-    testimonial: {
-      text: "Efficient and safe demolition work with proper cleanup.",
-      author: "John Lim",
-      rating: 5
-    }
-  },
-  {
-    icon: Wind,
-    title: "Aircond",
-    description: "Air conditioning installation and servicing",
-    image: "https://images.unsplash.com/photo-1527899161883-3eb074843f34",
-    testimonial: {
-      text: "Great AC service with professional maintenance!",
-      author: "Kamal Ibrahim",
-      rating: 5
-    }
-  }
-];
+import { services } from "./services/data/servicesData";
+import { toast } from "@/components/ui/use-toast";
 
 export const Services = () => {
+  const handleRequestService = (serviceName: string) => {
+    toast({
+      title: "Service Request",
+      description: `Your request for ${serviceName} service has been received. We'll contact you soon!`,
+    });
+  };
+
   return (
     <section className="py-20 bg-accent">
       <div className="container mx-auto px-4">
@@ -143,11 +60,20 @@ export const Services = () => {
                   <p className="text-sm italic text-gray-600 mb-2">"{service.testimonial.text}"</p>
                   <p className="text-sm font-semibold text-gray-800">- {service.testimonial.author}</p>
                 </div>
-                <Button variant="link" className="text-primary p-0 mt-4" asChild>
-                  <Link to={`/services/${service.title.toLowerCase().replace(/[&\s]+/g, '-')}`}>
-                    Learn More
-                  </Link>
-                </Button>
+                <div className="flex gap-2 mt-4">
+                  <Button variant="link" className="text-primary p-0" asChild>
+                    <Link to={`/services/${service.title.toLowerCase().replace(/[&\s]+/g, '-')}`}>
+                      Learn More
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="secondary"
+                    className="text-primary"
+                    onClick={() => handleRequestService(service.title)}
+                  >
+                    Request Service
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
@@ -156,3 +82,5 @@ export const Services = () => {
     </section>
   );
 };
+
+export { services };
