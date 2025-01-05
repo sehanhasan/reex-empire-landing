@@ -3,17 +3,17 @@ import { Clock, Award, BadgeDollarSign } from "lucide-react";
 export const WhyChooseUs = () => {
   const features = [
     {
-      icon: <Clock className="w-16 h-16 text-white" />,
+      icon: <Clock className="w-16 h-16 text-[#00d0f7]" />,
       title: "Guaranteed Fast & Efficiency",
       description: "Quick turnaround times without compromising on quality"
     },
     {
-      icon: <Award className="w-16 h-16 text-white" />,
+      icon: <Award className="w-16 h-16 text-[#00d0f7]" />,
       title: "Best Quality & Services",
       description: "Premium workmanship and exceptional customer service"
     },
     {
-      icon: <BadgeDollarSign className="w-16 h-16 text-white" />,
+      icon: <BadgeDollarSign className="w-16 h-16 text-[#00d0f7]" />,
       title: "Affordable & Reasonable Price",
       description: "Competitive pricing without hidden costs"
     }
