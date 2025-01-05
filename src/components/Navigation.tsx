@@ -125,7 +125,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           <Link to="/">
             <img 
-              src="https://i.ibb.co/Ltyts5K/reex-empire-logo.png" 
+              src="https://i.ibb.co/M28gB6X/Reex-logo.png" 
               alt="Reex Empire Logo" 
               className="h-12"
             />
