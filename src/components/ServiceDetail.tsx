@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { services } from './Services';
 import { ServiceGallery } from './services/ServiceGallery';
 import { ServiceTestimonials } from './services/ServiceTestimonials';
-import { serviceGalleryImages, serviceTestimonials } from './services/ServiceData';
+import { serviceGalleryImages, serviceTestimonials } from './services/data/servicesData';
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
