@@ -7,7 +7,7 @@ export const services = [
     icon: Wrench,
     title: "Maintenance",
     description: "Comprehensive maintenance services for your property",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758",
     testimonial: {
       text: "Excellent maintenance service that keeps our property in top condition!",
       author: "David Wong",
@@ -18,7 +18,7 @@ export const services = [
     icon: Hammer,
     title: "Carpentry",
     description: "Expert carpentry and woodworking solutions",
-    image: "https://images.unsplash.com/photo-1622150162807-12a1f647f4e7",
+    image: "https://images.unsplash.com/photo-1504148455328-c376907d081c",
     testimonial: {
       text: "Outstanding carpentry work with great attention to detail.",
       author: "Sarah Tan",
@@ -29,7 +29,7 @@ export const services = [
     icon: Palette,
     title: "Interior Design",
     description: "Creative interior design and space planning",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
+    image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221",
     testimonial: {
       text: "Transformed our space into something truly beautiful!",
       author: "Linda Chen",
@@ -40,7 +40,7 @@ export const services = [
     icon: PaintBucket,
     title: "Painting",
     description: "Professional painting services for all surfaces",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
+    image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828",
     testimonial: {
       text: "Excellent paint job that brightened up our entire home!",
       author: "Michael Lee",
@@ -51,7 +51,7 @@ export const services = [
     icon: PenLine,
     title: "Plumbing",
     description: "Complete plumbing solutions and repairs",
-    image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
+    image: "https://images.unsplash.com/photo-1542013936693-884638332954",
     testimonial: {
       text: "Quick and efficient plumbing service!",
       author: "Raj Kumar",
@@ -62,7 +62,7 @@ export const services = [
     icon: HardHat,
     title: "Renovation",
     description: "Full-scale renovation and remodeling services",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e",
+    image: "https://images.unsplash.com/photo-1574359886553-7ac247955371",
     testimonial: {
       text: "Completely transformed our home with excellent renovation work!",
       author: "Ahmad Hassan",
@@ -73,7 +73,7 @@ export const services = [
     icon: Construction,
     title: "Demolition",
     description: "Professional and safe demolition services",
-    image: "https://images.unsplash.com/photo-1626271763156-520913751759",
+    image: "https://images.unsplash.com/photo-1590791897393-5f4f1c25dea7",
     testimonial: {
       text: "Efficient and safe demolition work with proper cleanup.",
       author: "John Lim",
@@ -84,7 +84,7 @@ export const services = [
     icon: Wind,
     title: "Aircond",
     description: "Air conditioning installation and servicing",
-    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a",
+    image: "https://images.unsplash.com/photo-1527899161883-3eb074843f34",
     testimonial: {
       text: "Great AC service with professional maintenance!",
       author: "Kamal Ibrahim",
