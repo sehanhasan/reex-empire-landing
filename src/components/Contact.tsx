@@ -98,14 +98,14 @@ export const Contact = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               placeholder="Your Name"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
               required
               value={formData.name}
               onChange={(e) => handleChange(e, 'name')}
             />
             <Input
               placeholder="Phone Number"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
               required
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
@@ -114,7 +114,7 @@ export const Contact = () => {
               value={formData.area}
               onValueChange={(value) => handleChange(value, 'area')}
             >
-              <SelectTrigger className="bg-white/10 border-white/20 text-white h-[42px] focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
+              <SelectTrigger className="bg-white/10 border border-white text-white h-[42px] focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
                 <SelectValue placeholder="Select Area" />
               </SelectTrigger>
               <SelectContent className="bg-white text-gray-900 border-none shadow-lg">
@@ -140,7 +140,7 @@ export const Contact = () => {
                     className={`p-2 rounded border ${
                       formData.services.includes(service.title)
                         ? 'bg-secondary text-secondary-foreground'
-                        : 'bg-white/10 border-white/20'
+                        : 'bg-white/10 border-white'
                     } transition-colors`}
                   >
                     {service.title}
@@ -150,7 +150,7 @@ export const Contact = () => {
             </div>
             <Textarea
               placeholder="Description"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[120px] resize-none"
+              className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[120px] resize-none"
               required
               value={formData.description}
               onChange={(e) => handleChange(e, 'description')}
@@ -158,7 +158,7 @@ export const Contact = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-white hover:bg-white/90 text-primary transition-all duration-200 h-[42px]"
+              className="w-full bg-white hover:bg-white/90 text-primary text-sm transition-all duration-200 h-[42px]"
             >
               Request Quote
             </Button>
