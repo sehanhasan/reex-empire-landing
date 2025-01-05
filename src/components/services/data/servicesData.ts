@@ -95,7 +95,7 @@ export const services: ServiceData[] = [
     icon: Wind,
     title: "Aircond",
     description: "Air conditioning installation and servicing",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4",
+    image: "https://i.ibb.co/g4SfZBQ/image.png",
     testimonial: {
       text: "Great AC service with professional maintenance!",
       author: "Kamal Ibrahim",
