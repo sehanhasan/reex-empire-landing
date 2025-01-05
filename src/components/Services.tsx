@@ -67,7 +67,7 @@ export const Services = () => {
                     </Link>
                   </Button>
                   <Button 
-                    className="bg-[#00d0f7] text-white hover:bg-[#00b8dd]"
+                    className="bg-[#0BA5E9] text-white hover:bg-[#0BA5E9]/90"
                     onClick={() => handleRequestService(service.title)}
                   >
                     Request Service
