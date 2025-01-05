@@ -12,9 +12,9 @@ export const Services = () => {
   };
 
   return (
-    <section className="py-20 bg-accent">
+    <section className="py-12 md:py-20 bg-accent">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Services</h2>
           <p className="text-lg text-gray-600">One Stop Renovation Solutions</p>
           <p className="text-md text-gray-600 mt-2">

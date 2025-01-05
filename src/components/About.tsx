@@ -2,7 +2,7 @@ import { CheckCircle } from "lucide-react";
 
 export const About = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-secondary/20">
+    <section className="py-12 md:py-24 bg-gradient-to-b from-white to-secondary/20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
