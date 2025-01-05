@@ -29,11 +29,11 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#0F172A',
+          DEFAULT: '#0EA5E9', // Ocean Blue
           foreground: '#FFFFFF'
         },
         secondary: {
-          DEFAULT: '#FDB241',
+          DEFAULT: '#D3E4FD', // Soft Blue
           foreground: '#0F172A'
         },
         accent: {
