@@ -65,13 +65,6 @@ export const Hero = () => {
                         Get a Free Quote
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="lg"
-                        className="bg-white/10 hover:bg-white/20 text-white border-white/30"
-                      >
-                        View Our Services
-                      </Button>
                     </div>
                   </div>
                 </div>
