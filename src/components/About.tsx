@@ -20,6 +20,10 @@ export const About = () => {
                   <p className="font-bold text-3xl text-primary">500+</p>
                   <p className="text-gray-600">Projects Completed</p>
                 </div>
+                <div className="bg-white p-6 rounded-xl shadow-lg">
+                  <p className="font-bold text-3xl text-primary">10+</p>
+                  <p className="text-gray-600">Years Experience</p>
+                </div>
               </div>
             </div>
 
@@ -30,8 +34,7 @@ export const About = () => {
                   "Expert team of certified professionals",
                   "Transparent pricing and timelines",
                   "Premium quality materials",
-                  "After-service support",
-                  "100% Satisfaction Guaranteed"
+                  "After-service support"
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-4 group">
                     <div className="bg-secondary/30 p-2 rounded-full group-hover:bg-primary/10 transition-colors">
