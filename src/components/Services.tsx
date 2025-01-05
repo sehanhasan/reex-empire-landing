@@ -1,4 +1,4 @@
-import { Wrench, Hammer, Palette, PaintBucket, Pipeline, HardHat, Construction, Wind } from "lucide-react";
+import { Wrench, Hammer, Palette, PaintBucket, PenLine, HardHat, Construction, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -48,7 +48,7 @@ export const services = [
     }
   },
   {
-    icon: Pipeline,
+    icon: PenLine,
     title: "Plumbing",
     description: "Complete plumbing solutions and repairs",
     image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",

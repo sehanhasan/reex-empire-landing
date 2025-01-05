@@ -228,8 +228,8 @@ export const ServiceDetail = () => {
     );
   }
 
-  const galleryImages = serviceGalleryImages[serviceId as keyof typeof serviceGalleryImages] || serviceGalleryImages.default;
-  const testimonials = serviceTestimonials[serviceId as keyof typeof serviceTestimonials] || serviceTestimonials.default;
+  const galleryImages = serviceGalleryImages[serviceId as keyof typeof serviceGalleryImages] || [];
+  const testimonials = serviceTestimonials[serviceId as keyof typeof serviceTestimonials] || [];
 
   return (
     <div className="container mx-auto px-4 pt-8 pb-20 md:py-20">
