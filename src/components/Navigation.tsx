@@ -69,15 +69,6 @@ const MobileNav = () => {
           <Link to="/about" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
             About
           </Link>
-          <Button 
-            onClick={() => {
-              setIsOpen(false);
-              scrollToContact();
-            }}
-            className="mx-4"
-          >
-            Contact Us
-          </Button>
         </div>
       </SheetContent>
     </Sheet>
@@ -139,8 +130,13 @@ export const Navigation = () => {
               className="h-12"
             />
           </Link>
-          <DesktopNav />
-          <MobileNav />
+          <div className="flex items-center gap-2">
+            <Button onClick={scrollToContact} variant="default" className="md:hidden">
+              Contact Us
+            </Button>
+            <DesktopNav />
+            <MobileNav />
+          </div>
         </div>
       </div>
     </nav>
