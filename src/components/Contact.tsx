@@ -98,14 +98,14 @@ export const Contact = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               placeholder="Your Name"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-white/50 focus:bg-white/15 transition-all"
               required
               value={formData.name}
               onChange={(e) => handleChange(e, 'name')}
             />
             <Input
               placeholder="Phone Number"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-white/50 focus:bg-white/15 transition-all"
               required
               value={formData.phone}
               onChange={(e) => handleChange(e, 'phone')}
@@ -114,15 +114,15 @@ export const Contact = () => {
               value={formData.area}
               onValueChange={(value) => handleChange(value, 'area')}
             >
-              <SelectTrigger className="bg-white/10 border-white/20 text-white h-[42px] focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
-                <SelectValue placeholder="Select Area" />
+              <SelectTrigger className="bg-white/10 border-white/30 text-white h-[42px] focus:border-white/50 focus:bg-white/15 transition-all">
+                <SelectValue placeholder="Select Area" className="text-white/60" />
               </SelectTrigger>
-              <SelectContent className="bg-white text-gray-900 border-none shadow-lg">
+              <SelectContent className="bg-white border-none shadow-lg">
                 {areas.map((area) => (
                   <SelectItem 
                     key={area} 
                     value={area}
-                    className="focus:bg-gray-100 cursor-pointer hover:bg-gray-100"
+                    className="focus:bg-primary/10 cursor-pointer hover:bg-primary/10 text-gray-800"
                   >
                     {area}
                   </SelectItem>
@@ -130,18 +130,18 @@ export const Contact = () => {
               </SelectContent>
             </Select>
             <div className="space-y-2">
-              <label className="block text-base font-medium">Select Service</label>
+              <label className="block text-base font-medium text-white/90">Select Service</label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {services.map((service) => (
                   <button
                     key={service.title}
                     type="button"
                     onClick={() => toggleService(service.title)}
-                    className={`p-2 rounded border ${
+                    className={`p-2 rounded border transition-all ${
                       formData.services.includes(service.title)
-                        ? 'bg-secondary text-secondary-foreground'
-                        : 'bg-white/10 border-white/20'
-                    } transition-colors`}
+                        ? 'bg-white text-primary border-white hover:bg-white/90'
+                        : 'bg-white/10 border-white/30 hover:bg-white/15 hover:border-white/50'
+                    }`}
                   >
                     {service.title}
                   </button>
@@ -150,7 +150,7 @@ export const Contact = () => {
             </div>
             <Textarea
               placeholder="Description"
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[120px] resize-none"
+              className="bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-white/50 focus:bg-white/15 transition-all min-h-[120px] resize-none"
               required
               value={formData.description}
               onChange={(e) => handleChange(e, 'description')}
@@ -158,7 +158,7 @@ export const Contact = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground transition-all duration-200 h-[42px]"
+              className="w-full bg-white hover:bg-white/90 text-primary font-semibold transition-all duration-200 h-[42px]"
             >
               Request Quote
             </Button>
