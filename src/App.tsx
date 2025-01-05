@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { ServiceDetail } from "./components/ServiceDetail";
+import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import Index from "./pages/Index";
 
@@ -21,7 +22,12 @@ const App = () => (
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/services/:serviceId" element={<ServiceDetail />} />
+              <Route path="/services/:serviceId" element={
+                <>
+                  <ServiceDetail />
+                  <Contact />
+                </>
+              } />
             </Routes>
           </main>
           <Footer />
