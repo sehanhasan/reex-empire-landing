@@ -1,115 +1,93 @@
-import { BrickWall, Grid3X3, TreePine, Plug, Wrench, PaintBucket, Home, LampCeiling, AirVent, Settings } from "lucide-react";
+import { Wrench, Hammer, Palette, PaintBucket, Pipeline, HardHat, Construction, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const services = [
   {
-    icon: BrickWall,
-    title: "Brick Works",
-    description: "Professional brick laying and masonry services",
-    image: "/images/services/brickworks.jpg",
+    icon: Wrench,
+    title: "Maintenance",
+    description: "Comprehensive maintenance services for your property",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
     testimonial: {
-      text: "Excellent brick work that completely transformed our home's exterior!",
-      author: "Ahmad Rahman",
-      rating: 5
-    }
-  },
-  {
-    icon: Grid3X3,
-    title: "Floor & Tiling Works",
-    description: "Expert tiling solutions for floors and walls",
-    image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "The tile work in our bathroom is absolutely stunning!",
-      author: "Sarah Tan",
-      rating: 5
-    }
-  },
-  {
-    icon: TreePine,
-    title: "Timber Works",
-    description: "Quality timber installations and repairs",
-    image: "https://images.unsplash.com/photo-1610505466122-b1fe0e911ea5?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "Outstanding craftsmanship on our wooden flooring project.",
-      author: "Michael Lee",
-      rating: 5
-    }
-  },
-  {
-    icon: Plug,
-    title: "Electrical Wiring Works",
-    description: "Safe and reliable electrical installations",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "Very professional electrical work with attention to safety.",
-      author: "Raj Kumar",
-      rating: 5
-    }
-  },
-  {
-    icon: Settings,
-    title: "Plumbing Works",
-    description: "Complete plumbing solutions and repairs",
-    image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "Fixed our plumbing issues quickly and efficiently!",
-      author: "Linda Chong",
-      rating: 5
-    }
-  },
-  {
-    icon: PaintBucket,
-    title: "Painting Works",
-    description: "Professional painting services for all surfaces",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "Excellent paint job that brightened up our entire home!",
+      text: "Excellent maintenance service that keeps our property in top condition!",
       author: "David Wong",
       rating: 5
     }
   },
   {
-    icon: Home,
-    title: "Roofing Works",
-    description: "Expert roof installation and repairs",
-    image: "https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80",
+    icon: Hammer,
+    title: "Carpentry",
+    description: "Expert carpentry and woodworking solutions",
+    image: "https://images.unsplash.com/photo-1622150162807-12a1f647f4e7",
     testimonial: {
-      text: "Great roofing work that solved our leakage issues.",
-      author: "Amir Hassan",
+      text: "Outstanding carpentry work with great attention to detail.",
+      author: "Sarah Tan",
       rating: 5
     }
   },
   {
-    icon: LampCeiling,
-    title: "Plaster Ceiling",
-    description: "Custom ceiling design and installation",
-    image: "https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&q=80",
+    icon: Palette,
+    title: "Interior Design",
+    description: "Creative interior design and space planning",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
     testimonial: {
-      text: "Beautiful ceiling work that adds elegance to our home!",
-      author: "Jenny Lim",
+      text: "Transformed our space into something truly beautiful!",
+      author: "Linda Chen",
       rating: 5
     }
   },
   {
-    icon: AirVent,
-    title: "Aircond Service",
-    description: "Complete air conditioning solutions",
-    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&q=80",
+    icon: PaintBucket,
+    title: "Painting",
+    description: "Professional painting services for all surfaces",
+    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
     testimonial: {
-      text: "Professional AC service that improved our comfort!",
+      text: "Excellent paint job that brightened up our entire home!",
+      author: "Michael Lee",
+      rating: 5
+    }
+  },
+  {
+    icon: Pipeline,
+    title: "Plumbing",
+    description: "Complete plumbing solutions and repairs",
+    image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39",
+    testimonial: {
+      text: "Quick and efficient plumbing service!",
+      author: "Raj Kumar",
+      rating: 5
+    }
+  },
+  {
+    icon: HardHat,
+    title: "Renovation",
+    description: "Full-scale renovation and remodeling services",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e",
+    testimonial: {
+      text: "Completely transformed our home with excellent renovation work!",
+      author: "Ahmad Hassan",
+      rating: 5
+    }
+  },
+  {
+    icon: Construction,
+    title: "Demolition",
+    description: "Professional and safe demolition services",
+    image: "https://images.unsplash.com/photo-1626271763156-520913751759",
+    testimonial: {
+      text: "Efficient and safe demolition work with proper cleanup.",
+      author: "John Lim",
+      rating: 5
+    }
+  },
+  {
+    icon: Wind,
+    title: "Aircond",
+    description: "Air conditioning installation and servicing",
+    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a",
+    testimonial: {
+      text: "Great AC service with professional maintenance!",
       author: "Kamal Ibrahim",
-      rating: 5
-    }
-  },
-  {
-    icon: Wrench,
-    title: "Maintenance Works",
-    description: "Regular maintenance and repair services",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80",
-    testimonial: {
-      text: "Reliable maintenance service that keeps everything running smoothly.",
-      author: "Alice Teo",
       rating: 5
     }
   }
