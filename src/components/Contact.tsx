@@ -71,7 +71,7 @@ export const Contact = () => {
               </p>
             </div>
             <img 
-              src="https://i.ibb.co/GkjqQbm/Group-22-1.png" 
+              src="https://i.ibb.co/fvW2RKX/Group-23.png" 
               alt="Get a Quote Illustration" 
               className="w-full max-w-md mx-auto"
             />
