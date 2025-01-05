@@ -1,5 +1,6 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import { useState } from "react";
@@ -17,6 +18,13 @@ const services = [
   { title: "Aircond Service", path: "/services/aircond" },
   { title: "Maintenance Works", path: "/services/maintenance" }
 ];
+
+const scrollToContact = () => {
+  const contactSection = document.querySelector('#get-a-quote');
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,9 +57,15 @@ const MobileNav = () => {
           <Link to="/about" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
             About
           </Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
-            Contact
-          </Link>
+          <Button 
+            onClick={() => {
+              setIsOpen(false);
+              scrollToContact();
+            }}
+            className="mx-4"
+          >
+            Contact Us
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
@@ -93,9 +107,9 @@ const DesktopNav = () => (
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <Link to="/contact" className="px-4 py-2 hover:text-primary">
-          Contact
-        </Link>
+        <Button onClick={scrollToContact} variant="default">
+          Contact Us
+        </Button>
       </NavigationMenuItem>
     </NavigationMenuList>
   </NavigationMenu>
