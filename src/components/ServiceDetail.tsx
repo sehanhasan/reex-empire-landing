@@ -96,7 +96,7 @@ export const ServiceDetail = () => {
   const testimonials = serviceTestimonials[serviceId as keyof typeof serviceTestimonials] || serviceTestimonials.default;
 
   return (
-    <div className="container mx-auto px-4 py-20">
+    <div className="container mx-auto px-4 pt-8 pb-20 md:py-20">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <Link to="/" className="text-primary hover:underline mb-4 inline-block">
