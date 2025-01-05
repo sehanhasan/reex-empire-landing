@@ -2,6 +2,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
+  const scrollToQuote = () => {
+    const quoteSection = document.querySelector('#get-a-quote');
+    if (quoteSection) {
+      quoteSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative min-h-[90vh]">
       <div className="relative h-[90vh] w-full">
@@ -32,6 +39,7 @@ export const Hero = () => {
               <Button 
                 size="lg"
                 className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                onClick={scrollToQuote}
               >
                 Get a Free Quote
                 <ArrowRight className="ml-2 h-4 w-4" />
