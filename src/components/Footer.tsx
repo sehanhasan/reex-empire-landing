@@ -29,10 +29,15 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center gap-4">
             <img 
               src="https://www.goldmates.com.my/wp-content/uploads/2021/02/best-price-guaranteed.png" 
               alt="Best Price Guaranteed"
+              className="max-w-[200px] h-auto"
+            />
+            <img 
+              src="https://tvsolutions.ie/wp-content/uploads/2018/12/guarantee.png" 
+              alt="100% Satisfaction Guaranteed"
               className="max-w-[200px] h-auto"
             />
           </div>
