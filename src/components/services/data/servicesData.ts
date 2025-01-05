@@ -84,7 +84,7 @@ export const services: ServiceData[] = [
     icon: Construction,
     title: "Demolition",
     description: "Professional and safe demolition services",
-    image: "https://images.unsplash.com/photo-1626963781637-1766c8542f99",
+    image: "https://i.ibb.co/n04TxXz/image.png",
     testimonial: {
       text: "Efficient and safe demolition work with proper cleanup.",
       author: "John Lim",
