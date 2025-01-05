@@ -29,16 +29,16 @@ export const Hero = () => {
         />
         <div className="container relative z-10 mx-auto px-4 h-full flex items-center justify-center">
           <div className="max-w-3xl animate-fadeIn text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               <span><span className="text-[#00d0f7]">Renovation, Construction & Remodeling</span> Services in Kuala Lumpur</span>
             </h1>
-            <p className="text-xl text-white/90 mb-8 text-center">
+            <p className="text-xl text-white/90 mb-8">
               Call us at <a href="tel:011-16-656525" className="hover:text-[#00d0f7] transition-colors">011-16-656525</a> or email <a href="mailto:reexsb@gmail.com" className="hover:text-[#00d0f7] transition-colors">reexsb@gmail.com</a>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-center"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
                 onClick={scrollToQuote}
               >
                 Get a Free Quote
