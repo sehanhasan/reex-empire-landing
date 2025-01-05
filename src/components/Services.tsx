@@ -7,7 +7,7 @@ export const services = [
     icon: BrickWall,
     title: "Brick Works",
     description: "Professional brick laying and masonry services",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&q=80",
+    image: "/images/services/brickworks.jpg",
     testimonial: {
       text: "Excellent brick work that completely transformed our home's exterior!",
       author: "Ahmad Rahman",
@@ -138,6 +138,10 @@ export const Services = () => {
                   src={service.image} 
                   alt={service.title}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    img.src = "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&q=80";
+                  }}
                 />
                 <div className="absolute top-4 left-4 w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
                   <service.icon className="w-6 h-6 text-white" />
