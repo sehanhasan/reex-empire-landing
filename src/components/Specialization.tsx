@@ -4,12 +4,12 @@ export const Specialization = () => {
   const specializations = [
     {
       title: "COMMERCIAL",
-      image: "/lovable-uploads/05806fd6-d2ef-412e-a75a-12fa78fd2441.png",
+      image: "/lovable-uploads/ae9ce440-c3e7-4794-bef5-9ba435dcd9f4.png",
       description: "Expert solutions for restaurants, offices, and retail spaces"
     },
     {
       title: "RESIDENTIAL",
-      image: "/lovable-uploads/05806fd6-d2ef-412e-a75a-12fa78fd2441.png",
+      image: "/lovable-uploads/ae9ce440-c3e7-4794-bef5-9ba435dcd9f4.png",
       description: "Transform your living spaces with our professional services"
     }
   ];
