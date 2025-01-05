@@ -12,7 +12,7 @@ export const Hero = () => {
   const slides = [
     {
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80",
-      title: "Transforming Spaces, Enhancing Lives in Kuala Lumpur",
+      title: "#1 Renovation, Construction & Remodeling Services in Kuala Lumpur",
       subtitle: "Expert Renovation & Maintenance Solutions You Can Rely On"
     },
     {
