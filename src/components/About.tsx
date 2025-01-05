@@ -8,7 +8,7 @@ export const About = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Kuala Lumpur's Trusted
+                #1 Kuala Lumpur's Trusted
                 <span className="text-primary block">Renovation Partner</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
