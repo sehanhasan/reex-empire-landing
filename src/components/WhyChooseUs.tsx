@@ -1,6 +1,9 @@
 import { Clock, Award, BadgeDollarSign } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const WhyChooseUs = () => {
+  const isMobile = useIsMobile();
+
   const features = [
     {
       icon: <Clock className="w-16 h-16 text-white" />,
@@ -44,11 +47,12 @@ export const WhyChooseUs = () => {
     <section className="relative py-20">
       {/* Parallax Background with Dark Overlay */}
       <div 
-        className="absolute inset-0 bg-fixed z-0"
+        className={`absolute inset-0 z-0 ${!isMobile ? 'bg-fixed' : ''}`}
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          backgroundAttachment: isMobile ? 'scroll' : 'fixed'
         }}
       >
         <div className="absolute inset-0 bg-black/70" />
