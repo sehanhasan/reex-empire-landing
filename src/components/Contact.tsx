@@ -67,7 +67,7 @@ export const Contact = () => {
             </SelectContent>
           </Select>
           <Textarea
-            placeholder="Tell us about your project"
+            placeholder="Description"
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px] resize-none"
             required
           />
