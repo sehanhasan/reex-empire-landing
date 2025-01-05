@@ -67,7 +67,7 @@ export const Contact = () => {
             <div className="max-w-xl">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Get a Free Quote</h2>
               <p className="text-white/80 mb-8">
-                Tell us about your project and we'll get back to you within 24 hours
+                Send us the message and we'll get back to you shortly
               </p>
             </div>
             <img 
