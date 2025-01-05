@@ -13,7 +13,7 @@ export const Hero = () => {
     {
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80",
       title: "#1 Renovation, Construction & Remodeling Services in Kuala Lumpur",
-      subtitle: "Expert Renovation & Maintenance Solutions You Can Rely On"
+      subtitle: "Call us at 011-16-656525 or email reexsb@gmail.com"
     },
     {
       image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80",
