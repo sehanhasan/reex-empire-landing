@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { services } from "./services/data/servicesData";
-import { toast } from "@/components/ui/use-toast";
 
 export const Services = () => {
   const handleRequestService = (serviceName: string) => {
@@ -19,11 +18,6 @@ export const Services = () => {
       // Scroll to the quote section
       quoteSection.scrollIntoView({ behavior: 'smooth' });
     }
-
-    toast({
-      title: "Service Request",
-      description: `Your request for ${serviceName} service has been received. We'll contact you soon!`,
-    });
   };
 
   return (
