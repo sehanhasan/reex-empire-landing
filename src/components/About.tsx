@@ -1,4 +1,4 @@
-import { CheckCircle, Building2 } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 export const About = () => {
   return (
@@ -7,9 +7,6 @@ export const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-block">
-                <Building2 className="w-12 h-12 text-primary mb-4" />
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 Kuala Lumpur's Trusted
                 <span className="text-primary block">Renovation Partner</span>
