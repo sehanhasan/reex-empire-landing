@@ -20,6 +20,10 @@ export const Services = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="py-12 md:py-20 bg-accent">
       <div className="container mx-auto px-4">
@@ -70,7 +74,10 @@ export const Services = () => {
                 </div>
                 <div className="flex justify-between items-center mt-4">
                   <Button variant="link" className="text-primary p-0" asChild>
-                    <Link to={`/services/${service.title.toLowerCase().replace(/[&\s]+/g, '-')}`}>
+                    <Link 
+                      to={`/services/${service.title.toLowerCase().replace(/[&\s]+/g, '-')}`}
+                      onClick={scrollToTop}
+                    >
                       Learn More
                     </Link>
                   </Button>
