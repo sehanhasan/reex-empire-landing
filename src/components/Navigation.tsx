@@ -7,16 +7,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const services = [
-  { title: "Brick Works", path: "/services/brick-works" },
-  { title: "Floor & Tiling Works", path: "/services/floor-tiling" },
-  { title: "Timber Works", path: "/services/timber-works" },
-  { title: "Electrical Wiring Works", path: "/services/electrical" },
-  { title: "Plumbing Works", path: "/services/plumbing" },
-  { title: "Painting Works", path: "/services/painting" },
-  { title: "Roofing Works", path: "/services/roofing" },
-  { title: "Plaster Ceiling", path: "/services/plaster-ceiling" },
-  { title: "Aircond Service", path: "/services/aircond" },
-  { title: "Maintenance Works", path: "/services/maintenance" }
+  { title: "Maintenance", path: "/services/maintenance" },
+  { title: "Carpentry", path: "/services/carpentry" },
+  { title: "Interior Design", path: "/services/interior-design" },
+  { title: "Painting", path: "/services/painting" },
+  { title: "Plumbing", path: "/services/plumbing" },
+  { title: "Renovation", path: "/services/renovation" },
+  { title: "Demolition", path: "/services/demolition" },
+  { title: "Aircond", path: "/services/aircond" }
 ];
 
 const scrollToContact = () => {
@@ -66,9 +64,6 @@ const MobileNav = () => {
               ))}
             </div>
           </div>
-          <Link to="/about" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
-            About
-          </Link>
         </div>
       </SheetContent>
     </Sheet>
@@ -103,11 +98,6 @@ const DesktopNav = () => (
             </div>
           </div>
         </NavigationMenuContent>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <Link to="/about" className="px-4 py-2 hover:text-primary">
-          About
-        </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <Button onClick={scrollToContact} variant="default">
