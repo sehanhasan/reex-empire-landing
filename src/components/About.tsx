@@ -9,7 +9,7 @@ export const About = () => {
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 #1 Kuala Lumpur's Trusted
-                <span className="text-primary block">Renovation Partner</span>
+                <span className="text-primary block">Services Partner</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
                 With years of experience transforming spaces across Kuala Lumpur, Reex Empire has established itself as a leader in renovation and maintenance services. Our commitment to quality and customer satisfaction sets us apart.
