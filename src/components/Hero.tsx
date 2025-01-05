@@ -46,7 +46,13 @@ export const Hero = () => {
                     backgroundImage: `url(${slide.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    filter: 'brightness(0.7)'
+                  }}
+                />
+                <div 
+                  className="absolute inset-0 z-0"
+                  style={{
+                    backgroundColor: '#1A1F2C',
+                    opacity: 0.75,
                   }}
                 />
                 <div className="container relative z-10 mx-auto px-4 h-full flex items-center">
