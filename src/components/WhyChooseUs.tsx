@@ -42,6 +42,7 @@ export const WhyChooseUs = () => {
 
   return (
     <section className="relative py-20">
+      {/* Parallax Background with Dark Overlay */}
       <div 
         className="absolute inset-0 bg-fixed z-0"
         style={{
@@ -57,6 +58,9 @@ export const WhyChooseUs = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-[#00d0f7] mb-4">Why Choose Reex Empire?</h2>
           <p className="text-2xl text-white/90 mb-8">It's Simple!</p>
+          <p className="text-lg text-white/80 max-w-3xl mx-auto">
+            We provide one stop & full range of renovation services to our customers. So you just have to sit back and relax!
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-12 md:gap-8 mb-20">
