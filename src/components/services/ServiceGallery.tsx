@@ -51,15 +51,17 @@ export const ServiceGallery = ({ images, serviceTitle }: ServiceGalleryProps) =>
       </div>
 
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImageIndex(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 relative">
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 relative bg-transparent border-none">
           {selectedImage && (
             <>
-              <img
-                src={`${selectedImage}?auto=format&fit=crop&q=100`}
-                alt={serviceTitle}
-                className="w-full h-full object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
+              <div className="relative w-full h-[80vh] flex items-center justify-center">
+                <img
+                  src={`${selectedImage}?auto=format&fit=crop&q=100`}
+                  alt={serviceTitle}
+                  className="max-w-full max-h-full object-contain"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
               <button
                 onClick={handlePrevious}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
