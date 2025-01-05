@@ -48,7 +48,7 @@ export const ServiceDetail = () => {
             <Button 
               asChild 
               size="lg"
-              className="bg-[#0BA5E9] text-white hover:bg-[#0BA5E9]/90"
+              className="bg-[#00d0f7] text-white hover:bg-[#00d0f7]/90"
             >
               <Link to="/contact">Request a Quote</Link>
             </Button>
