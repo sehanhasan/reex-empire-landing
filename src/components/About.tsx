@@ -32,7 +32,6 @@ export const About = () => {
               <div className="space-y-5">
                 {[
                   "Expert team of certified professionals",
-                  "10+ years of industry experience",
                   "100% satisfaction guarantee",
                   "Transparent pricing and timelines",
                   "Premium quality materials",
