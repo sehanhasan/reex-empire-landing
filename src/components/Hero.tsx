@@ -26,7 +26,7 @@ export const Hero = () => {
               <span><span className="text-[#00d0f7]">Renovation, Construction & Remodeling</span> Services in Kuala Lumpur</span>
             </h1>
             <p className="text-xl text-white/90 mb-8">
-              Call us at 011-16-656525 or email reexsb@gmail.com
+              Call us at <a href="tel:011-16-656525" className="hover:text-[#00d0f7] transition-colors">011-16-656525</a> or email <a href="mailto:reexsb@gmail.com" className="hover:text-[#00d0f7] transition-colors">reexsb@gmail.com</a>
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
