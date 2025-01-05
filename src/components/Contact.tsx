@@ -10,16 +10,53 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "./services/data/servicesData";
+import { useState } from "react";
 
 export const Contact = () => {
   const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    description: "",
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Format the message
+    const message = encodeURIComponent(
+      `*New Quote Request*\n\n` +
+      `*Name:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Phone:* ${formData.phone}\n` +
+      `*Service:* ${formData.service}\n` +
+      `*Description:* ${formData.description}`
+    );
+
+    // WhatsApp API URL
+    const whatsappUrl = `https://wa.me/601116656525?text=${message}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+
     toast({
-      title: "Quote Request Received",
-      description: "We'll get back to you within 24 hours!",
+      title: "Quote Request Prepared",
+      description: "Redirecting you to WhatsApp to send your request.",
     });
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
+    field: string
+  ) => {
+    if (typeof e === 'string') {
+      setFormData(prev => ({ ...prev, [field]: e }));
+    } else {
+      const { value } = e.target;
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
   };
 
   return (
@@ -37,20 +74,30 @@ export const Contact = () => {
               placeholder="Your Name"
               className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               required
+              value={formData.name}
+              onChange={(e) => handleChange(e, 'name')}
             />
             <Input
               type="email"
               placeholder="Email Address"
               className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               required
+              value={formData.email}
+              onChange={(e) => handleChange(e, 'email')}
             />
           </div>
           <Input
             placeholder="Phone Number"
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
             required
+            value={formData.phone}
+            onChange={(e) => handleChange(e, 'phone')}
           />
-          <Select required>
+          <Select 
+            required
+            value={formData.service}
+            onValueChange={(value) => handleChange(value, 'service')}
+          >
             <SelectTrigger className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-[42px]">
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
@@ -58,7 +105,7 @@ export const Contact = () => {
               {services.map((service) => (
                 <SelectItem 
                   key={service.title} 
-                  value={service.title.toLowerCase()}
+                  value={service.title}
                   className="hover:bg-gray-100 cursor-pointer"
                 >
                   {service.title}
@@ -70,6 +117,8 @@ export const Contact = () => {
             placeholder="Description"
             className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px] resize-none"
             required
+            value={formData.description}
+            onChange={(e) => handleChange(e, 'description')}
           />
           <Button
             type="submit"
