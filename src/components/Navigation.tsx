@@ -1,7 +1,7 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -67,24 +67,24 @@ const DesktopNav = () => (
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">Services</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-            {services.map((service) => (
-              <li key={service.path}>
-                <NavigationMenuLink asChild>
+          <div className="w-[500px] bg-white p-4 shadow-lg rounded-lg">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+              {services.map((service) => (
+                <NavigationMenuLink asChild key={service.path}>
                   <Link
                     to={service.path}
                     className={cn(
-                      "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      "block select-none rounded-md p-3 text-base leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
                     )}
                   >
-                    <div className="text-sm font-medium leading-none">{service.title}</div>
+                    {service.title}
                   </Link>
                 </NavigationMenuLink>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
       <NavigationMenuItem>
