@@ -1,6 +1,28 @@
 import { Button } from "./ui/button";
 import { Link, useParams } from "react-router-dom";
 import { services } from "./Services";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+// Gallery images for each service
+const serviceGalleryImages = {
+  'electrical-wiring-works': [
+    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475',
+    'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
+  ],
+  // Add default images for other services
+  'default': [
+    'https://images.unsplash.com/photo-1581578731548-c64695cc6952',
+    'https://images.unsplash.com/photo-1621905251918-48416bd8575a',
+    'https://images.unsplash.com/photo-1613545325278-f24b0cae1224'
+  ]
+};
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
@@ -20,6 +42,8 @@ export const ServiceDetail = () => {
     );
   }
 
+  const galleryImages = serviceGalleryImages[serviceId as keyof typeof serviceGalleryImages] || serviceGalleryImages.default;
+
   return (
     <div className="container mx-auto px-4 py-20">
       <div className="max-w-4xl mx-auto">
@@ -28,13 +52,32 @@ export const ServiceDetail = () => {
             ← Back to Home
           </Link>
           <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-          <div className="relative h-[400px] rounded-lg overflow-hidden mb-8">
-            <img 
-              src={service.image} 
-              alt={service.title}
-              className="w-full h-full object-cover"
-            />
+          
+          {/* Image Gallery */}
+          <div className="mb-8">
+            <Carousel className="w-full max-w-4xl mx-auto">
+              <CarouselContent>
+                {galleryImages.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="relative h-[400px] rounded-lg overflow-hidden">
+                      <img 
+                        src={`${image}?auto=format&fit=crop&q=80`}
+                        alt={`${service.title} gallery image ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          img.src = service.image;
+                        }}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
           </div>
+
           <p className="text-lg text-gray-700 mb-8">{service.description}</p>
           
           <div className="bg-accent rounded-lg p-6 mb-8">
