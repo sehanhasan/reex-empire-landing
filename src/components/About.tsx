@@ -46,7 +46,7 @@ export const About = () => {
               </div>
               <div className="flex justify-center items-center gap-8 mt-8">
                 <img 
-                  src="https://www.goldmates.com.my/wp-content/uploads/2021/02/best-price-guaranteed.png" 
+                  src="https://i.ibb.co/dbCdzJQ/best-price-badge.png" 
                   alt="Best Price Guaranteed"
                   className="max-w-[120px] h-auto object-contain"
                 />
