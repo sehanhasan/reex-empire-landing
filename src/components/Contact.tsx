@@ -11,10 +11,8 @@ import {
 } from "@/components/ui/select";
 import { services } from "./services/data/servicesData";
 import { useState } from "react";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export const Contact = () => {
-  const { t } = useLanguage();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -86,9 +84,9 @@ export const Contact = () => {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <div className="max-w-xl">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.title')}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Get a Free Quote</h2>
               <p className="text-white/80 mb-8">
-                {t('contact.subtitle')}
+                Send us the message and we'll get back to you shortly
               </p>
             </div>
             <img 
@@ -99,14 +97,14 @@ export const Contact = () => {
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
-              placeholder={t('contact.form.name')}
+              placeholder="Your Name"
               className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
               required
               value={formData.name}
               onChange={(e) => handleChange(e, 'name')}
             />
             <Input
-              placeholder={t('contact.form.phone')}
+              placeholder="Phone Number"
               className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
               required
               value={formData.phone}
@@ -117,7 +115,7 @@ export const Contact = () => {
               onValueChange={(value) => handleChange(value, 'area')}
             >
               <SelectTrigger className="bg-white/10 border border-white text-white h-[42px] focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
-                <SelectValue placeholder={t('contact.form.area')} />
+                <SelectValue placeholder="Select Area" />
               </SelectTrigger>
               <SelectContent className="bg-white text-gray-900 border-none shadow-lg">
                 {areas.map((area) => (
@@ -132,7 +130,7 @@ export const Contact = () => {
               </SelectContent>
             </Select>
             <div className="space-y-2">
-              <label className="block text-base font-medium">{t('contact.form.services')}</label>
+              <label className="block text-base font-medium">Select Service</label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {services.map((service) => (
                   <button
@@ -151,7 +149,7 @@ export const Contact = () => {
               </div>
             </div>
             <Textarea
-              placeholder={t('contact.form.description')}
+              placeholder="Description"
               className="bg-white/10 border border-white text-white placeholder:text-white/50 focus:outline-none focus:ring-0 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[120px] resize-none"
               required
               value={formData.description}
@@ -162,7 +160,7 @@ export const Contact = () => {
               size="lg"
               className="w-full bg-white hover:bg-white/90 text-primary text-sm transition-all duration-200 h-[42px]"
             >
-              {t('contact.form.submit')}
+              Request Quote
             </Button>
           </form>
         </div>

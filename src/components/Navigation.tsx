@@ -2,16 +2,9 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Menu, Languages } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const services = [
   { title: "Maintenance", path: "/services/maintenance" },
@@ -31,33 +24,9 @@ const scrollToFooter = () => {
   }
 };
 
-const LanguageSelector = () => {
-  const { language, setLanguage } = useLanguage();
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="w-[80px]">
-          <Languages className="w-4 h-4 mr-2" />
-          {language.toUpperCase()}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[80px]">
-        <DropdownMenuItem onClick={() => setLanguage('en')}>
-          EN
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setLanguage('my')}>
-          MY
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
-
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const { t } = useLanguage();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -69,14 +38,14 @@ const MobileNav = () => {
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <div className="flex flex-col gap-4 mt-8">
           <Link to="/" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
-            {t('nav.home')}
+            Home
           </Link>
           <div className="flex flex-col">
             <button 
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="flex items-center justify-between px-4 py-2 hover:bg-accent rounded-md"
             >
-              <span className="font-medium">{t('nav.services')}</span>
+              <span className="font-medium">Services</span>
               <ChevronDown className={cn("h-4 w-4 transition-transform", isServicesOpen && "rotate-180")} />
             </button>
             <div className={cn(
@@ -101,56 +70,45 @@ const MobileNav = () => {
   );
 };
 
-const DesktopNav = () => {
-  const { t } = useLanguage();
-  
-  return (
-    <NavigationMenu className="hidden md:flex">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link to="/" className="px-4 py-2 hover:text-primary">
-            {t('nav.home')}
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">
-            {t('nav.services')}
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="w-[500px] bg-white p-4 shadow-lg rounded-lg">
-              <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-                {services.map((service) => (
-                  <NavigationMenuLink asChild key={service.path}>
-                    <Link
-                      to={service.path}
-                      className={cn(
-                        "block select-none rounded-md p-3 text-base leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                      )}
-                    >
-                      {service.title}
-                    </Link>
-                  </NavigationMenuLink>
-                ))}
-              </div>
+const DesktopNav = () => (
+  <NavigationMenu className="hidden md:flex">
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <Link to="/" className="px-4 py-2 hover:text-primary">
+          Home
+        </Link>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">Services</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <div className="w-[500px] bg-white p-4 shadow-lg rounded-lg">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+              {services.map((service) => (
+                <NavigationMenuLink asChild key={service.path}>
+                  <Link
+                    to={service.path}
+                    className={cn(
+                      "block select-none rounded-md p-3 text-base leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                    )}
+                  >
+                    {service.title}
+                  </Link>
+                </NavigationMenuLink>
+              ))}
             </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <div className="flex items-center gap-4">
-            <LanguageSelector />
-            <Button onClick={scrollToFooter} variant="default">
-              {t('nav.contactUs')}
-            </Button>
           </div>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-};
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <Button onClick={scrollToFooter} variant="default">
+          Contact Us
+        </Button>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+);
 
 export const Navigation = () => {
-  const { t } = useLanguage();
-  
   return (
     <nav className="border-b bg-white sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -164,7 +122,7 @@ export const Navigation = () => {
           </Link>
           <div className="flex items-center gap-2">
             <Button onClick={scrollToFooter} variant="default" className="md:hidden">
-              {t('nav.contactUs')}
+              Contact Us
             </Button>
             <DesktopNav />
             <MobileNav />

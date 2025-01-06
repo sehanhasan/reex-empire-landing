@@ -1,18 +1,17 @@
 import React from "react";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { Badge } from "@/components/ui/badge";
+import { Shield, DollarSign } from "lucide-react";
 
 export const Specialization = () => {
-  const { t } = useLanguage();
-
   const specializations = [
     {
-      title: t('specialization.commercial.title'),
-      description: t('specialization.commercial.description'),
+      title: "Commercial",
+      description: "Expert solutions for offices, retail spaces, and business establishments",
       image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80",
     },
     {
-      title: t('specialization.residential.title'),
-      description: t('specialization.residential.description'),
+      title: "Residential",
+      description: "Transform your living spaces into beautiful, functional homes",
       image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80",
     },
   ];
@@ -22,7 +21,7 @@ export const Specialization = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            {t('specialization.title')}
+            We Are Specialized In
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
