@@ -2,9 +2,16 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Languages, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const services = [
   { title: "Maintenance", path: "/services/maintenance" },
@@ -27,6 +34,7 @@ const scrollToFooter = () => {
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -38,14 +46,14 @@ const MobileNav = () => {
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <div className="flex flex-col gap-4 mt-8">
           <Link to="/" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
-            Home
+            {t('nav.home')}
           </Link>
           <div className="flex flex-col">
             <button 
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="flex items-center justify-between px-4 py-2 hover:bg-accent rounded-md"
             >
-              <span className="font-medium">Services</span>
+              <span className="font-medium">{t('nav.services')}</span>
               <ChevronDown className={cn("h-4 w-4 transition-transform", isServicesOpen && "rotate-180")} />
             </button>
             <div className={cn(
@@ -70,43 +78,66 @@ const MobileNav = () => {
   );
 };
 
-const DesktopNav = () => (
-  <NavigationMenu className="hidden md:flex">
-    <NavigationMenuList>
-      <NavigationMenuItem>
-        <Link to="/" className="px-4 py-2 hover:text-primary">
-          Home
-        </Link>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">Services</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="w-[500px] bg-white p-4 shadow-lg rounded-lg">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-              {services.map((service) => (
-                <NavigationMenuLink asChild key={service.path}>
-                  <Link
-                    to={service.path}
-                    className={cn(
-                      "block select-none rounded-md p-3 text-base leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                    )}
-                  >
-                    {service.title}
-                  </Link>
-                </NavigationMenuLink>
-              ))}
+const DesktopNav = () => {
+  const { t, language, setLanguage } = useLanguage();
+
+  return (
+    <NavigationMenu className="hidden md:flex">
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <Link to="/" className="px-4 py-2 hover:text-primary">
+            {t('nav.home')}
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">
+            {t('nav.services')}
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="w-[500px] bg-white p-4 shadow-lg rounded-lg">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                {services.map((service) => (
+                  <NavigationMenuLink asChild key={service.path}>
+                    <Link
+                      to={service.path}
+                      className={cn(
+                        "block select-none rounded-md p-3 text-base leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                      )}
+                    >
+                      {service.title}
+                    </Link>
+                  </NavigationMenuLink>
+                ))}
+              </div>
             </div>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <Button onClick={scrollToFooter} variant="default">
-          Contact Us
-        </Button>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  </NavigationMenu>
-);
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Languages className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setLanguage('en')} className={cn(language === 'en' && "bg-accent")}>
+                🇬🇧 English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('my')} className={cn(language === 'my' && "bg-accent")}>
+                🇲🇾 Bahasa Melayu
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Button onClick={scrollToFooter} variant="default">
+            {t('nav.contact')}
+          </Button>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+};
 
 export const Navigation = () => {
   return (
