@@ -57,6 +57,7 @@ const LanguageSelector = () => {
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -68,14 +69,14 @@ const MobileNav = () => {
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <div className="flex flex-col gap-4 mt-8">
           <Link to="/" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
-            Home
+            {t('nav.home')}
           </Link>
           <div className="flex flex-col">
             <button 
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="flex items-center justify-between px-4 py-2 hover:bg-accent rounded-md"
             >
-              <span className="font-medium">Services</span>
+              <span className="font-medium">{t('nav.services')}</span>
               <ChevronDown className={cn("h-4 w-4 transition-transform", isServicesOpen && "rotate-180")} />
             </button>
             <div className={cn(
@@ -148,6 +149,8 @@ const DesktopNav = () => {
 };
 
 export const Navigation = () => {
+  const { t } = useLanguage();
+  
   return (
     <nav className="border-b bg-white sticky top-0 z-50">
       <div className="container mx-auto px-4">

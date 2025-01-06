@@ -4,6 +4,13 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 export const About = () => {
   const { t } = useLanguage();
 
+  const features = [
+    "Expert team of certified professionals",
+    "Transparent pricing and timelines",
+    "Premium quality materials",
+    "After-service support"
+  ];
+
   return (
     <section className="py-12 md:py-24 bg-gradient-to-b from-white to-secondary/20">
       <div className="container mx-auto px-4">
@@ -33,7 +40,7 @@ export const About = () => {
             <div className="bg-white p-8 rounded-2xl shadow-lg">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">{t('about.whyChoose')}</h3>
               <div className="space-y-5">
-                {t('about.features').map((item: string) => (
+                {features.map((item) => (
                   <div key={item} className="flex items-center gap-4 group">
                     <div className="bg-secondary/30 p-2 rounded-full group-hover:bg-primary/10 transition-colors">
                       <CheckCircle className="text-primary w-5 h-5 flex-shrink-0" />
