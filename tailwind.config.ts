@@ -23,7 +23,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['eurostile-extended', 'sans-serif'],
+        sans: ['eurostile', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -14,7 +14,9 @@ const services = [
   { title: "Plumbing", path: "/services/plumbing" },
   { title: "Renovation", path: "/services/renovation" },
   { title: "Demolition", path: "/services/demolition" },
-  { title: "Aircond", path: "/services/aircond" }
+  { title: "Aircond", path: "/services/aircond" },
+  { title: "Electrical", path: "/services/electrical" },
+  { title: "Flooring", path: "/services/flooring" }
 ];
 
 const scrollToFooter = () => {
