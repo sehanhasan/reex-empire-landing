@@ -4,18 +4,13 @@ import { services } from "./services/data/servicesData";
 
 export const Services = () => {
   const handleRequestService = (serviceName: string) => {
-    // Find the quote section
     const quoteSection = document.querySelector('#get-a-quote');
     if (quoteSection) {
-      // Find the service select element
       const serviceSelect = quoteSection.querySelector('select') as HTMLSelectElement;
       if (serviceSelect) {
-        // Set the value to the selected service
         serviceSelect.value = serviceName.toLowerCase();
-        // Trigger change event to update the select component's UI
         serviceSelect.dispatchEvent(new Event('change', { bubbles: true }));
       }
-      // Scroll to the quote section
       quoteSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -26,18 +21,18 @@ export const Services = () => {
 
   return (
     <section className="py-12 md:py-20 bg-accent">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Services</h2>
           <p className="text-md text-gray-600 mt-2">
             We are the expert in home, office & shop renovation and maintenance services providing you the one-stop solution to your needs.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div 
               key={service.title}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-fadeIn"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-fadeIn flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative h-48">
@@ -54,10 +49,10 @@ export const Services = () => {
                   <service.icon className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <div className="border-t pt-4 mt-4">
+                <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
+                <div className="border-t pt-4 mt-auto">
                   <div className="flex items-center mb-2">
                     {[...Array(service.testimonial.rating)].map((_, i) => (
                       <svg 

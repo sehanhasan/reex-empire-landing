@@ -1,4 +1,4 @@
-import { Wrench, Hammer, Palette, PaintBucket, PenLine, HardHat, Construction, Wind } from "lucide-react";
+import { Wrench, Hammer, Palette, PaintBucket, PenLine, HardHat, Construction, Wind, Zap, Grid } from "lucide-react";
 import type { LucideIcon } from 'lucide-react';
 
 export interface ServiceData {
@@ -99,6 +99,28 @@ export const services: ServiceData[] = [
     testimonial: {
       text: "Great AC service with professional maintenance!",
       author: "Kamal Ibrahim",
+      rating: 5
+    }
+  },
+  {
+    icon: Zap,
+    title: "Electrical",
+    description: "Professional electrical installation and repairs",
+    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4",
+    testimonial: {
+      text: "Very professional electrical work with safety as top priority!",
+      author: "Lee Wei Ming",
+      rating: 5
+    }
+  },
+  {
+    icon: Grid,
+    title: "Flooring",
+    description: "Expert flooring installation and maintenance",
+    image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d",
+    testimonial: {
+      text: "Perfect flooring installation, very satisfied with the result!",
+      author: "Nurul Aina",
       rating: 5
     }
   }
