@@ -22,9 +22,6 @@ export default {
       }
     },
     extend: {
-      fontFamily: {
-        sans: ['eurostile-extended', 'sans-serif'],
-      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -32,11 +29,11 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#0EA5E9',
+          DEFAULT: '#0EA5E9', // Ocean Blue
           foreground: '#FFFFFF'
         },
         secondary: {
-          DEFAULT: '#D3E4FD',
+          DEFAULT: '#D3E4FD', // Soft Blue
           foreground: '#0F172A'
         },
         accent: {
