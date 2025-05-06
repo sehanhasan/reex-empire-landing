@@ -23,11 +23,7 @@ export const Contact = () => {
   });
 
   const areas = [
-    "Kuala Lumpur",
-    "Petaling Jaya",
-    "Subang Jaya",
-    "Shah Alam",
-    "Klang"
+    "Kuala Lumpur"
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
