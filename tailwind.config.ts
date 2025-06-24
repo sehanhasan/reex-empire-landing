@@ -24,7 +24,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Eurostile', 'Arial', 'sans-serif'],
+        sans: ['Eurostile', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
+        eurostile: ['Eurostile', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

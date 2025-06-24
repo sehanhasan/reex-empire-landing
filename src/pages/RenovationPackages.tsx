@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Home, Wrench, Calendar, Shield, DollarSign, Palette } from "lucide-react";
+import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X } from "lucide-react";
 import { Helmet } from "react-helmet";
+
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -15,6 +19,7 @@ const RenovationPackages = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const content = {
     en: {
       hero: {
@@ -137,12 +142,14 @@ const RenovationPackages = () => {
       }
     }
   };
+
   const currentContent = content[language];
   const handleWhatsAppContact = () => {
     const phoneNumber = "601116656525";
     const message = encodeURIComponent("Hi, I'm interested in your renovation packages.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
+
   const beforeAfterImages = [{
     before: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
@@ -150,11 +157,47 @@ const RenovationPackages = () => {
     before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
   }];
+
   const renovationGallery = ["/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png", "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png", "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png", "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png", "/lovable-uploads/01109413-abf6-408c-a8f9-a95692e74fba.png", "/lovable-uploads/802cfdac-e630-4a4b-b418-f5e9cb90e2fb.png", "/lovable-uploads/34c2ea63-c800-4cbc-a195-0b57234324fd.png", "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png", "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"];
 
   // Show only 6 images on mobile
   const displayGallery = window.innerWidth < 768 ? renovationGallery.slice(0, 6) : renovationGallery;
-  return <div className="min-h-screen font-sans" style={{
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = () => {
+    setLightboxIndex((prev) => (prev + 1) % displayGallery.length);
+  };
+
+  const prevImage = () => {
+    setLightboxIndex((prev) => (prev - 1 + displayGallery.length) % displayGallery.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+      
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      } else if (e.key === 'ArrowLeft') {
+        prevImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen]);
+
+  return <div className="min-h-screen font-eurostile" style={{
     fontFamily: "'Eurostile', 'Arial', sans-serif"
   }}>
       <Helmet>
@@ -185,7 +228,7 @@ const RenovationPackages = () => {
         backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
       }} className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" />
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 font-eurostile" style={{
           fontFamily: "'Eurostile', 'Arial', sans-serif"
         }}>
             {currentContent.hero.title}
@@ -245,13 +288,58 @@ const RenovationPackages = () => {
           
           {/* Mobile Responsive Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {displayGallery.map((image, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            {displayGallery.map((image, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" onClick={() => openLightbox(index)}>
                 <img src={image} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                  <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    Click to view
+                  </div>
+                </div>
               </div>)}
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl max-h-full">
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+            >
+              <X size={32} />
+            </button>
+            
+            <img
+              src={displayGallery[lightboxIndex]}
+              alt={`Renovation ${lightboxIndex + 1}`}
+              className="max-w-full max-h-full object-contain"
+            />
+            
+            {displayGallery.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-4xl"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-4xl"
+                >
+                  ›
+                </button>
+              </>
+            )}
+            
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
+              {lightboxIndex + 1} / {displayGallery.length}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Flexible Options Section */}
       <section className="py-20 bg-secondary bg-sky-100">

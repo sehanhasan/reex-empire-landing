@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +18,7 @@ export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    area: "",
+    area: "Kuala Lumpur", // Set default value
     services: [] as string[],
     description: "",
   });
