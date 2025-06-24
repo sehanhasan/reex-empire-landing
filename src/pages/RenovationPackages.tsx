@@ -1,13 +1,24 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Home, Wrench, Calendar, Shield, DollarSign, Palette } from "lucide-react";
+import { Helmet } from "react-helmet";
 
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const content = {
     en: {
@@ -160,10 +171,23 @@ const RenovationPackages = () => {
     "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"
   ];
 
+  // Show only 6 images on mobile
+  const displayGallery = window.innerWidth < 768 ? renovationGallery.slice(0, 6) : renovationGallery;
+
   return (
-    <div className="min-h-screen">
-      {/* Language Toggle */}
-      <div className="top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 fixed">
+    <div className="min-h-screen font-sans" style={{ fontFamily: "'Eurostile', 'Arial', sans-serif" }}>
+      <Helmet>
+        <title>Renovation Packages - Property Renovation Services</title>
+        <meta name="description" content="Upgrade your property with zero cost renovation packages. Full interior renovation with high-end furnishings included." />
+        <meta property="og:title" content="Renovation Packages - Property Renovation Services" />
+        <meta property="og:description" content="Upgrade your property with zero cost renovation packages. Full interior renovation with high-end furnishings included." />
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:url" content="https://yoursite.com/renovation-packages" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
+      {/* Language Toggle - Hidden on scroll */}
+      <div className={`top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 fixed'}`}>
         <div className="flex gap-2">
           <Button
             variant={language === 'en' ? 'default' : 'outline'}
@@ -193,7 +217,7 @@ const RenovationPackages = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         />
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: "'Eurostile', 'Arial', sans-serif" }}>
             {currentContent.hero.title}
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white/90">
@@ -269,7 +293,7 @@ const RenovationPackages = () => {
           
           {/* Mobile Responsive Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {renovationGallery.map((image, index) => (
+            {displayGallery.map((image, index) => (
               <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <img 
                   src={image} 
@@ -324,25 +348,52 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Selling Timeline */}
+      {/* Selling Timeline with Beautiful Cards */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             {currentContent.selling.title}
           </h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-red-50 rounded-lg">
-                <div className="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">1</div>
-                <p className="font-semibold text-red-700">{currentContent.selling.year1}</p>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="relative text-center group">
+                <div className="bg-gradient-to-br from-red-500 to-red-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <span className="text-2xl font-bold text-red-600">1</span>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
+                    <h3 className="text-lg font-bold text-white mb-2">Year 1</h3>
+                    <p className="text-white/90 text-sm">Pay 100% renovation cost</p>
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-300 rounded-full opacity-50 animate-pulse"></div>
+                </div>
               </div>
-              <div className="text-center p-6 bg-yellow-50 rounded-lg">
-                <div className="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">2</div>
-                <p className="font-semibold text-yellow-700">{currentContent.selling.year2}</p>
+              
+              <div className="relative text-center group">
+                <div className="bg-gradient-to-br from-yellow-500 to-orange-500 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <span className="text-2xl font-bold text-orange-600">2</span>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
+                    <h3 className="text-lg font-bold text-white mb-2">Year 2</h3>
+                    <p className="text-white/90 text-sm">Pay 50% renovation cost</p>
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full opacity-50 animate-pulse"></div>
+                </div>
               </div>
-              <div className="text-center p-6 bg-green-50 rounded-lg">
-                <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">2+</div>
-                <p className="font-semibold text-green-700">{currentContent.selling.after}</p>
+              
+              <div className="relative text-center group">
+                <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <span className="text-2xl font-bold text-green-600">2+</span>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
+                    <h3 className="text-lg font-bold text-white mb-2">After 2 Years</h3>
+                    <p className="text-white/90 text-sm">Completely FREE!</p>
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-300 rounded-full opacity-50 animate-pulse"></div>
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-emerald-400 rounded-full opacity-70"></div>
+                </div>
               </div>
             </div>
           </div>
