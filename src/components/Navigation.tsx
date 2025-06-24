@@ -1,3 +1,4 @@
+
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,9 @@ const MobileNav = () => {
           <Link to="/" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
             Home
           </Link>
+          <Link to="/renovation-packages" onClick={() => setIsOpen(false)} className="px-4 py-2 hover:bg-accent rounded-md">
+            Renovation Packages
+          </Link>
           <div className="flex flex-col">
             <button 
               onClick={() => setIsServicesOpen(!isServicesOpen)}
@@ -78,6 +82,11 @@ const DesktopNav = () => (
       <NavigationMenuItem>
         <Link to="/" className="px-4 py-2 hover:text-primary">
           Home
+        </Link>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <Link to="/renovation-packages" className="px-4 py-2 hover:text-primary">
+          Renovation Packages
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
