@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,20 +5,16 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Home, Wrench, Calendar, Shield, DollarSign, Palette } from "lucide-react";
 import { Helmet } from "react-helmet";
-
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [isScrolled, setIsScrolled] = useState(false);
-  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
   const content = {
     en: {
       hero: {
@@ -142,15 +137,12 @@ const RenovationPackages = () => {
       }
     }
   };
-
   const currentContent = content[language];
-
   const handleWhatsAppContact = () => {
     const phoneNumber = "601116656525";
     const message = encodeURIComponent("Hi, I'm interested in your renovation packages.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
-
   const beforeAfterImages = [{
     before: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
@@ -158,24 +150,13 @@ const RenovationPackages = () => {
     before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
   }];
-
-  const renovationGallery = [
-    "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png",
-    "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png",
-    "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png",
-    "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png",
-    "/lovable-uploads/01109413-abf6-408c-a8f9-a95692e74fba.png",
-    "/lovable-uploads/802cfdac-e630-4a4b-b418-f5e9cb90e2fb.png",
-    "/lovable-uploads/34c2ea63-c800-4cbc-a195-0b57234324fd.png",
-    "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png",
-    "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"
-  ];
+  const renovationGallery = ["/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png", "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png", "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png", "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png", "/lovable-uploads/01109413-abf6-408c-a8f9-a95692e74fba.png", "/lovable-uploads/802cfdac-e630-4a4b-b418-f5e9cb90e2fb.png", "/lovable-uploads/34c2ea63-c800-4cbc-a195-0b57234324fd.png", "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png", "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"];
 
   // Show only 6 images on mobile
   const displayGallery = window.innerWidth < 768 ? renovationGallery.slice(0, 6) : renovationGallery;
-
-  return (
-    <div className="min-h-screen font-sans" style={{ fontFamily: "'Eurostile', 'Arial', sans-serif" }}>
+  return <div className="min-h-screen font-sans" style={{
+    fontFamily: "'Eurostile', 'Arial', sans-serif"
+  }}>
       <Helmet>
         <title>Renovation Packages - Property Renovation Services</title>
         <meta name="description" content="Upgrade your property with zero cost renovation packages. Full interior renovation with high-end furnishings included." />
@@ -189,20 +170,10 @@ const RenovationPackages = () => {
       {/* Language Toggle - Hidden on scroll */}
       <div className={`top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 fixed'}`}>
         <div className="flex gap-2">
-          <Button
-            variant={language === 'en' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setLanguage('en')}
-            className="text-xs"
-          >
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 English
           </Button>
-          <Button
-            variant={language === 'zh' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setLanguage('zh')}
-            className="text-xs"
-          >
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
             🇨🇳 中文
           </Button>
         </div>
@@ -210,48 +181,31 @@ const RenovationPackages = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white">
-        <div
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
-          }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        />
+        <div style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
+      }} className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" />
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: "'Eurostile', 'Arial', sans-serif" }}>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{
+          fontFamily: "'Eurostile', 'Arial', sans-serif"
+        }}>
             {currentContent.hero.title}
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white/90">
             {currentContent.hero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-white text-[#0D66B3] hover:bg-white/90"
-              onClick={handleWhatsAppContact}
-            >
+            <Button size="lg" className="bg-white text-[#0D66B3] hover:bg-white/90" onClick={handleWhatsAppContact}>
               {currentContent.hero.cta1}
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-[#0D66B3] bg-transparent"
-                >
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#0D66B3] bg-transparent">
                   {currentContent.hero.cta2}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl w-full">
                 <div className="aspect-video">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="Renovation Transformation"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Renovation Transformation" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>
               </DialogContent>
             </Dialog>
@@ -266,15 +220,13 @@ const RenovationPackages = () => {
             {currentContent.whatsIncluded.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {currentContent.whatsIncluded.items.map((item, index) => (
-              <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
+            {currentContent.whatsIncluded.items.map((item, index) => <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-8">
                   <item.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                   <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -293,16 +245,10 @@ const RenovationPackages = () => {
           
           {/* Mobile Responsive Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {displayGallery.map((image, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <img 
-                  src={image} 
-                  alt={`Renovation ${index + 1}`}
-                  className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+            {displayGallery.map((image, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <img src={image} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -363,7 +309,7 @@ const RenovationPackages = () => {
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
                     <h3 className="text-lg font-bold text-white mb-2">Year 1</h3>
-                    <p className="text-white/90 text-sm">Pay 100% renovation cost</p>
+                    <p className="text-white/90 text-base">Pay 100% renovation cost</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-300 rounded-full opacity-50 animate-pulse"></div>
                 </div>
@@ -376,7 +322,7 @@ const RenovationPackages = () => {
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
                     <h3 className="text-lg font-bold text-white mb-2">Year 2</h3>
-                    <p className="text-white/90 text-sm">Pay 50% renovation cost</p>
+                    <p className="text-white/90 text-base">Pay 50% renovation cost</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full opacity-50 animate-pulse"></div>
                 </div>
@@ -389,7 +335,7 @@ const RenovationPackages = () => {
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
                     <h3 className="text-lg font-bold text-white mb-2">After 2 Years</h3>
-                    <p className="text-white/90 text-sm">Completely FREE!</p>
+                    <p className="text-white/90 text-base">Completely FREE!</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-300 rounded-full opacity-50 animate-pulse"></div>
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-emerald-400 rounded-full opacity-70"></div>
@@ -409,8 +355,7 @@ const RenovationPackages = () => {
           <div className="max-w-4xl mx-auto">
             <Carousel className="w-full">
               <CarouselContent>
-                {beforeAfterImages.map((images, index) => (
-                  <CarouselItem key={index}>
+                {beforeAfterImages.map((images, index) => <CarouselItem key={index}>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="relative">
                         <img src={images.before} alt="Before renovation" className="w-full h-64 object-cover rounded-lg" />
@@ -425,8 +370,7 @@ const RenovationPackages = () => {
                         </div>
                       </div>
                     </div>
-                  </CarouselItem>
-                ))}
+                  </CarouselItem>)}
               </CarouselContent>
               <div className="flex justify-center gap-2 mt-4 md:hidden">
                 <CarouselPrevious className="relative left-0 top-0 translate-y-0" />
@@ -447,15 +391,7 @@ const RenovationPackages = () => {
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Property Transformation Showcase"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Property Transformation Showcase" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
         </div>
@@ -467,17 +403,11 @@ const RenovationPackages = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
             {currentContent.finalCta.title}
           </h2>
-          <Button
-            size="lg"
-            className="bg-white text-primary hover:bg-white/90"
-            onClick={handleWhatsAppContact}
-          >
+          <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={handleWhatsAppContact}>
             {currentContent.finalCta.button}
           </Button>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default RenovationPackages;
