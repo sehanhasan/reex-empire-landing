@@ -33,6 +33,10 @@ const RenovationPackages = () => {
           description: "Estimated renovation value at no cost to you"
         }]
       },
+      gallery: {
+        title: "Renovation Gallery",
+        subtitle: "Stunning transformations from our recent projects"
+      },
       flexibleOptions: {
         title: "Your Property, Your Choice After 2 Years",
         option1: {
@@ -55,7 +59,7 @@ const RenovationPackages = () => {
         year2: "Sell in Year 2: Pay 50%",
         after: "After 2 Years: Free!"
       },
-      gallery: {
+      beforeAfter: {
         title: "Before & After Transformations"
       },
       video: {
@@ -89,6 +93,10 @@ const RenovationPackages = () => {
           description: "估计装修价值，您无需承担任何费用"
         }]
       },
+      gallery: {
+        title: "装修画廊",
+        subtitle: "我们最近项目的惊人改造"
+      },
       flexibleOptions: {
         title: "2年后您的房产，您的选择",
         option1: {
@@ -111,7 +119,7 @@ const RenovationPackages = () => {
         year2: "第2年出售：支付50%",
         after: "2年后：免费！"
       },
-      gallery: {
+      beforeAfter: {
         title: "装修前后对比"
       },
       video: {
@@ -140,10 +148,22 @@ const RenovationPackages = () => {
     after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
   }];
 
+  const renovationGallery = [
+    "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png",
+    "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png",
+    "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png",
+    "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png",
+    "/lovable-uploads/01109413-abf6-408c-a8f9-a95692e74fba.png",
+    "/lovable-uploads/802cfdac-e630-4a4b-b418-f5e9cb90e2fb.png",
+    "/lovable-uploads/34c2ea63-c800-4cbc-a195-0b57234324fd.png",
+    "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png",
+    "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Language Toggle */}
-      <div className="absolute top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
+      <div className="top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 fixed">
         <div className="flex gap-2">
           <Button
             variant={language === 'en' ? 'default' : 'outline'}
@@ -192,7 +212,7 @@ const RenovationPackages = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-[#0D66B3]"
+                  className="border-white text-white hover:bg-white hover:text-[#0D66B3] bg-transparent"
                 >
                   {currentContent.hero.cta2}
                 </Button>
@@ -230,6 +250,34 @@ const RenovationPackages = () => {
                   <p className="text-gray-600">{item.description}</p>
                 </CardContent>
               </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Renovation Gallery Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              {currentContent.gallery.title}
+            </h2>
+            <p className="text-lg text-gray-600">
+              {currentContent.gallery.subtitle}
+            </p>
+          </div>
+          
+          {/* Mobile Responsive Gallery Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {renovationGallery.map((image, index) => (
+              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <img 
+                  src={image} 
+                  alt={`Renovation ${index + 1}`}
+                  className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+              </div>
             ))}
           </div>
         </div>
@@ -305,7 +353,7 @@ const RenovationPackages = () => {
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            {currentContent.gallery.title}
+            {currentContent.beforeAfter.title}
           </h2>
           <div className="max-w-4xl mx-auto">
             <Carousel className="w-full">
