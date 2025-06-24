@@ -1,14 +1,11 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Home, Wrench, Calendar, Shield, DollarSign, Palette } from "lucide-react";
-
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
-
   const content = {
     en: {
       hero: {
@@ -19,23 +16,19 @@ const RenovationPackages = () => {
       },
       whatsIncluded: {
         title: "What You Get with Our Renovation Package",
-        items: [
-          {
-            icon: Home,
-            title: "Full Interior Renovation",
-            description: "Complete transformation of your property with modern design"
-          },
-          {
-            icon: Palette,
-            title: "High-End Furnishings",
-            description: "Stylish decor and premium furniture included"
-          },
-          {
-            icon: DollarSign,
-            title: "RM40,000 – RM100,000 Investment",
-            description: "Estimated renovation value at no cost to you"
-          }
-        ]
+        items: [{
+          icon: Home,
+          title: "Full Interior Renovation",
+          description: "Complete transformation of your property with modern design"
+        }, {
+          icon: Palette,
+          title: "High-End Furnishings",
+          description: "Stylish decor and premium furniture included"
+        }, {
+          icon: DollarSign,
+          title: "RM40,000 – RM100,000 Investment",
+          description: "Estimated renovation value at no cost to you"
+        }]
       },
       flexibleOptions: {
         title: "Your Property, Your Choice After 2 Years",
@@ -79,23 +72,19 @@ const RenovationPackages = () => {
       },
       whatsIncluded: {
         title: "我们的装修套餐包含什么",
-        items: [
-          {
-            icon: Home,
-            title: "全面室内装修",
-            description: "采用现代设计完全改造您的房产"
-          },
-          {
-            icon: Palette,
-            title: "高端家具",
-            description: "包含时尚装饰和优质家具"
-          },
-          {
-            icon: DollarSign,
-            title: "RM40,000 – RM100,000 投资",
-            description: "估计装修价值，您无需承担任何费用"
-          }
-        ]
+        items: [{
+          icon: Home,
+          title: "全面室内装修",
+          description: "采用现代设计完全改造您的房产"
+        }, {
+          icon: Palette,
+          title: "高端家具",
+          description: "包含时尚装饰和优质家具"
+        }, {
+          icon: DollarSign,
+          title: "RM40,000 – RM100,000 投资",
+          description: "估计装修价值，您无需承担任何费用"
+        }]
       },
       flexibleOptions: {
         title: "2年后您的房产，您的选择",
@@ -131,46 +120,30 @@ const RenovationPackages = () => {
       }
     }
   };
-
   const currentContent = content[language];
-
   const scrollToContact = () => {
     const footerSection = document.querySelector('footer');
     if (footerSection) {
-      footerSection.scrollIntoView({ behavior: 'smooth' });
+      footerSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  const beforeAfterImages = [
-    {
-      before: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
-      after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
-      after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const beforeAfterImages = [{
+    before: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
+    after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
+  }, {
+    before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
+    after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
+  }];
+  return <div className="min-h-screen">
       {/* Language Toggle */}
       <div className="fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
         <div className="flex gap-2">
-          <Button
-            variant={language === 'en' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setLanguage('en')}
-            className="text-xs"
-          >
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 English
           </Button>
-          <Button
-            variant={language === 'zh' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setLanguage('zh')}
-            className="text-xs"
-          >
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
             🇨🇳 中文
           </Button>
         </div>
@@ -178,12 +151,9 @@ const RenovationPackages = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-primary/90 to-primary text-white">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
+      }} />
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             {currentContent.hero.title}
@@ -192,30 +162,18 @@ const RenovationPackages = () => {
             {currentContent.hero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90"
-              onClick={scrollToContact}
-            >
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToContact}>
               {currentContent.hero.cta1}
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
                   {currentContent.hero.cta2}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl w-full">
                 <div className="aspect-video">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="Renovation Transformation"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Renovation Transformation" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>
               </DialogContent>
             </Dialog>
@@ -230,35 +188,33 @@ const RenovationPackages = () => {
             {currentContent.whatsIncluded.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {currentContent.whatsIncluded.items.map((item, index) => (
-              <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
+            {currentContent.whatsIncluded.items.map((item, index) => <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-8">
                   <item.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                   <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
 
       {/* Flexible Options Section */}
-      <section className="py-20 bg-secondary">
+      <section className="py-20 bg-secondary bg-sky-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             {currentContent.flexibleOptions.title}
           </h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Card className="border-none shadow-lg">
-              <CardContent className="p-8 text-center">
+              <CardContent className="p-8 text-center bg-slate-50">
                 <Calendar className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-xl font-semibold mb-3">{currentContent.flexibleOptions.option1.title}</h3>
                 <p className="text-gray-600">{currentContent.flexibleOptions.option1.description}</p>
               </CardContent>
             </Card>
             <Card className="border-none shadow-lg">
-              <CardContent className="p-8 text-center">
+              <CardContent className="p-8 text-center bg-slate-50">
                 <Home className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-xl font-semibold mb-3">{currentContent.flexibleOptions.option2.title}</h3>
                 <p className="text-gray-600">{currentContent.flexibleOptions.option2.description}</p>
@@ -317,32 +273,22 @@ const RenovationPackages = () => {
           </h2>
           <Carousel className="max-w-4xl mx-auto">
             <CarouselContent>
-              {beforeAfterImages.map((images, index) => (
-                <CarouselItem key={index}>
+              {beforeAfterImages.map((images, index) => <CarouselItem key={index}>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="relative">
-                      <img 
-                        src={images.before} 
-                        alt="Before renovation"
-                        className="w-full h-64 object-cover rounded-lg"
-                      />
+                      <img src={images.before} alt="Before renovation" className="w-full h-64 object-cover rounded-lg" />
                       <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         {language === 'en' ? 'Before' : '装修前'}
                       </div>
                     </div>
                     <div className="relative">
-                      <img 
-                        src={images.after} 
-                        alt="After renovation"
-                        className="w-full h-64 object-cover rounded-lg"
-                      />
+                      <img src={images.after} alt="After renovation" className="w-full h-64 object-cover rounded-lg" />
                       <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         {language === 'en' ? 'After' : '装修后'}
                       </div>
                     </div>
                   </div>
-                </CarouselItem>
-              ))}
+                </CarouselItem>)}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
@@ -358,15 +304,7 @@ const RenovationPackages = () => {
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Property Transformation Showcase"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Property Transformation Showcase" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
         </div>
@@ -378,17 +316,11 @@ const RenovationPackages = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
             {currentContent.finalCta.title}
           </h2>
-          <Button 
-            size="lg" 
-            className="bg-white text-primary hover:bg-white/90"
-            onClick={scrollToContact}
-          >
+          <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={scrollToContact}>
             {currentContent.finalCta.button}
           </Button>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default RenovationPackages;
