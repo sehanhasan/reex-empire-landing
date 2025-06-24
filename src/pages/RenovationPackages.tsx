@@ -151,9 +151,9 @@ const RenovationPackages = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-primary/90 to-primary text-white">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style={{
+        <div style={{
         backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
-      }} />
+      }} className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" />
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             {currentContent.hero.title}
