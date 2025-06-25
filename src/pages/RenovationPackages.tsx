@@ -66,8 +66,11 @@ const RenovationPackages = () => {
       },
       selling: {
         title: "Want to Sell During the Contract?",
+        year1Label: "Year 1",
         year1: "Sell in Year 1: Pay 100% of renovation cost",
+        year2Label: "Year 2",
         year2: "Sell in Year 2: Pay 50%",
+        afterLabel: "After 2 Years",
         after: "After 2 Years: Free!"
       },
       beforeAfter: {
@@ -126,8 +129,11 @@ const RenovationPackages = () => {
       },
       selling: {
         title: "合约期内想要出售？", 
+        year1Label: "第1年出售",
         year1: "第1年出售：需支付100%装修费用",
+        year2Label: "第2年出售",
         year2: "第2年出售：需支付50%装修费用", 
+        afterLabel: "2年后出售",
         after: "2年后出售：完全免费！"
       },
       beforeAfter: {
