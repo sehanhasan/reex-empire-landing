@@ -125,10 +125,10 @@ const RenovationPackages = () => {
         subtitle: "整个租赁期间我们处理所有维修和保养"
       },
       selling: {
-        title: "合约期间想要出售？",
-        year1: "第1年出售：支付100%装修费用",
-        year2: "第2年出售：支付50%",
-        after: "2年后：免费！"
+        title: "合约期内想要出售？", 
+        year1: "第1年出售：需支付100%装修费用",
+        year2: "第2年出售：需支付50%装修费用", 
+        after: "2年后出售：完全免费！"
       },
       beforeAfter: {
         title: "装修前后对比"
