@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +12,7 @@ const RenovationPackages = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState<{[key: number]: number}>({});
+  const [beforeAfterSliders, setBeforeAfterSliders] = useState<{[key: number]: number}>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -171,9 +170,9 @@ const RenovationPackages = () => {
 
   const renovationMedia = [
     { type: 'image', src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png" },
-    { type: 'video', src: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+    { type: 'video', src: "https://www.youtube.com/embed/oz7wmF51Gwk" },
     { type: 'image', src: "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png" },
-    { type: 'video', src: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+    { type: 'video', src: "https://www.youtube.com/embed/oz7wmF51Gwk" },
     { type: 'image', src: "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png" },
     { type: 'image', src: "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png" }
   ];
@@ -198,17 +197,10 @@ const RenovationPackages = () => {
     setLightboxIndex((prev) => (prev - 1 + displayMedia.length) % displayMedia.length);
   };
 
-  const nextSlide = (imageIndex: number) => {
-    setCurrentSlide(prev => ({
+  const handleSliderChange = (imageIndex: number, value: number) => {
+    setBeforeAfterSliders(prev => ({
       ...prev,
-      [imageIndex]: prev[imageIndex] === 0 ? 1 : 0
-    }));
-  };
-
-  const prevSlide = (imageIndex: number) => {
-    setCurrentSlide(prev => ({
-      ...prev,
-      [imageIndex]: prev[imageIndex] === 1 ? 0 : 1
+      [imageIndex]: value
     }));
   };
 
@@ -255,10 +247,10 @@ const RenovationPackages = () => {
       </div>
 
       {/* Hero Section with YouTube Background */}
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
+      <section className="relative h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playlist=dQw4w9WgXcQ"
+            src="https://www.youtube.com/embed/oz7wmF51Gwk?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playlist=oz7wmF51Gwk"
             className="w-full h-full object-cover scale-125"
             allow="autoplay; encrypted-media"
             title="Hero Background Video"
@@ -286,7 +278,7 @@ const RenovationPackages = () => {
               </DialogTrigger>
               <DialogContent className="max-w-4xl w-full">
                 <div className="aspect-video">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Renovation Transformation" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oz7wmF51Gwk" title="Renovation Transformation" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>
               </DialogContent>
             </Dialog>
@@ -514,7 +506,7 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Before & After Section with In-Image Slider */}
+      {/* Before & After Section with Comparison Slider */}
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -524,47 +516,61 @@ const RenovationPackages = () => {
             <div className="grid md:grid-cols-2 gap-8">
               {beforeAfterImages.map((images, index) => (
                 <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group">
-                  <div className="relative h-80 w-full">
+                  {/* Before Image */}
+                  <img 
+                    src={images.before} 
+                    alt="Before renovation" 
+                    className="absolute inset-0 w-full h-full object-cover" 
+                  />
+                  
+                  {/* After Image with clip-path */}
+                  <div 
+                    className="absolute inset-0 overflow-hidden"
+                    style={{
+                      clipPath: `inset(0 ${100 - (beforeAfterSliders[index] || 50)}% 0 0)`
+                    }}
+                  >
                     <img 
-                      src={currentSlide[index] === 1 ? images.after : images.before} 
-                      alt={currentSlide[index] === 1 ? "After renovation" : "Before renovation"} 
-                      className="w-full h-full object-cover transition-all duration-500" 
+                      src={images.after} 
+                      alt="After renovation" 
+                      className="w-full h-full object-cover" 
                     />
-                    
-                    {/* Navigation arrows */}
-                    <button
-                      onClick={() => prevSlide(index)}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors text-white"
-                    >
-                      ‹
-                    </button>
-                    <button
-                      onClick={() => nextSlide(index)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors text-white"
-                    >
-                      ›
-                    </button>
-                    
-                    {/* Label */}
-                    <div className="absolute top-4 left-4">
-                      <div className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
-                        currentSlide[index] === 1 ? 'bg-green-500' : 'bg-red-500'
-                      }`}>
-                        {currentSlide[index] === 1 
-                          ? (language === 'en' ? 'After' : '装修后')
-                          : (language === 'en' ? 'Before' : '装修前')
-                        }
-                      </div>
+                  </div>
+                  
+                  {/* Slider */}
+                  <div className="absolute inset-0 flex items-center">
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={beforeAfterSliders[index] || 50}
+                      onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
+                      className="w-full h-full opacity-0 cursor-pointer z-10"
+                    />
+                  </div>
+                  
+                  {/* Divider Line */}
+                  <div 
+                    className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20 pointer-events-none"
+                    style={{
+                      left: `${beforeAfterSliders[index] || 50}%`,
+                      transform: 'translateX(-50%)'
+                    }}
+                  >
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+                      <div className="w-4 h-4 border-l-2 border-r-2 border-gray-600"></div>
                     </div>
-                    
-                    {/* Dots indicator */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                      <div className={`w-2 h-2 rounded-full transition-colors ${
-                        currentSlide[index] !== 1 ? 'bg-white' : 'bg-white/50'
-                      }`} />
-                      <div className={`w-2 h-2 rounded-full transition-colors ${
-                        currentSlide[index] === 1 ? 'bg-white' : 'bg-white/50'
-                      }`} />
+                  </div>
+                  
+                  {/* Labels */}
+                  <div className="absolute top-4 left-4">
+                    <div className="px-3 py-1 rounded-full text-sm font-semibold text-white bg-red-500">
+                      {language === 'en' ? 'Before' : '装修前'}
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <div className="px-3 py-1 rounded-full text-sm font-semibold text-white bg-green-500">
+                      {language === 'en' ? 'After' : '装修后'}
                     </div>
                   </div>
                 </div>
@@ -582,7 +588,7 @@ const RenovationPackages = () => {
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Property Transformation Showcase" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oz7wmF51Gwk" title="Property Transformation Showcase" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
         </div>

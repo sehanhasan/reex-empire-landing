@@ -1,24 +1,48 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, Play } from "lucide-react";
 import { Helmet } from "react-helmet";
+
 const Portfolio = () => {
+  const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [activeFilter, setActiveFilter] = useState('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState<{
     type: string;
     src: string;
   } | null>(null);
-  const filters = ['All', 'One-Bed', 'Two-Bed', 'Pent House'];
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const content = {
+    en: {
+      title: "Our Portfolio",
+      subtitle: "Explore our stunning renovation transformations across different property types",
+      filters: ['All', 'One-Bed', 'Two-Bed', 'Pent House']
+    },
+    zh: {
+      title: "我们的作品集",
+      subtitle: "探索我们在不同房产类型上的惊人改造",
+      filters: ['全部', '一房', '两房', '顶层公寓']
+    }
+  };
+
+  const currentContent = content[language];
+  const filters = currentContent.filters;
+  
   const portfolioItems = [{
     type: 'image',
     src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png",
     category: 'One-Bed'
   }, {
     type: 'video',
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk",
     category: 'One-Bed'
   }, {
     type: 'image',
@@ -26,7 +50,7 @@ const Portfolio = () => {
     category: 'Two-Bed'
   }, {
     type: 'video',
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk",
     category: 'Two-Bed'
   }, {
     type: 'image',
@@ -38,7 +62,7 @@ const Portfolio = () => {
     category: 'Pent House'
   }, {
     type: 'video',
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk",
     category: 'One-Bed'
   }, {
     type: 'image',
@@ -50,7 +74,7 @@ const Portfolio = () => {
     category: 'Pent House'
   }, {
     type: 'video',
-    src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk",
     category: 'Two-Bed'
   }, {
     type: 'image',
@@ -61,7 +85,23 @@ const Portfolio = () => {
     src: "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png",
     category: 'Pent House'
   }];
-  const filteredItems = activeFilter === 'All' ? portfolioItems : portfolioItems.filter(item => item.category === activeFilter);
+
+  const getFilteredItems = () => {
+    if (language === 'zh') {
+      const filterMap: { [key: string]: string } = {
+        '全部': 'All',
+        '一房': 'One-Bed',
+        '两房': 'Two-Bed',
+        '顶层公寓': 'Pent House'
+      };
+      const englishFilter = filterMap[activeFilter] || 'All';
+      return englishFilter === 'All' ? portfolioItems : portfolioItems.filter(item => item.category === englishFilter);
+    }
+    return activeFilter === 'All' ? portfolioItems : portfolioItems.filter(item => item.category === activeFilter);
+  };
+
+  const filteredItems = getFilteredItems();
+
   const openLightbox = (media: {
     type: string;
     src: string;
@@ -69,10 +109,12 @@ const Portfolio = () => {
     setSelectedMedia(media);
     setLightboxOpen(true);
   };
+
   const closeLightbox = () => {
     setLightboxOpen(false);
     setSelectedMedia(null);
   };
+
   return <div className="min-h-screen bg-gray-50">
       <Helmet>
         <title>Portfolio - Renovation Projects Gallery</title>
@@ -84,20 +126,32 @@ const Portfolio = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
+      {/* Language Toggle */}
+      <div className="fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
+        <div className="flex gap-2">
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
+            🇬🇧 English
+          </Button>
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
+            🇨🇳 中文
+          </Button>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="py-10 bg-gradient-to-r from-primary to-primary/80 text-white">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Our Portfolio
+            {currentContent.title}
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white/90">
-            Explore our stunning renovation transformations across different property types
+            {currentContent.subtitle}
           </p>
         </div>
       </section>
 
       {/* Filter Section */}
-      <section className="py-12 bg-white sticky top-0 z-40 shadow-sm">
+      <section className="py-12 bg-white sticky top-16 z-40 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
             {filters.map(filter => <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-6 py-2">
@@ -159,4 +213,5 @@ const Portfolio = () => {
       </Dialog>
     </div>;
 };
+
 export default Portfolio;
