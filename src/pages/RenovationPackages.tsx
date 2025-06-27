@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -73,7 +74,7 @@ const RenovationPackages = () => {
         year1: "Sell in Year 1: Pay 100% of renovation cost",
         year2Label: "Year 2",
         year2: "Sell in Year 2: Pay 50%",
-        afterLabel: "After 2 Years",
+        afterLabel: "After 2 Years", 
         after: "After 2 Years: Free!"
       },
       beforeAfter: {
@@ -132,11 +133,11 @@ const RenovationPackages = () => {
         subtitle: "整个租赁期间我们处理所有维修和保养"
       },
       selling: {
-        title: "合约期内想要出售？", 
+        title: "合约期内想要出售？",
         year1Label: "第1年",
         year1: "第1年出售：需支付100%装修费用",
-        year2Label: "第2年",
-        year2: "第2年出售：需支付50%装修费用", 
+        year2Label: "第2年", 
+        year2: "第2年出售：需支付50%装修费用",
         afterLabel: "2年后",
         after: "2年后出售：完全免费！"
       },
@@ -247,11 +248,12 @@ const RenovationPackages = () => {
       </div>
 
       {/* Hero Section with YouTube Background */}
-      <section className="relative h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
+      <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <iframe
             src="https://www.youtube.com/embed/oz7wmF51Gwk?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playlist=oz7wmF51Gwk"
-            className="w-full h-full object-cover scale-125"
+            className="w-full h-full object-cover"
+            style={{ minHeight: '70vh' }}
             allow="autoplay; encrypted-media"
             title="Hero Background Video"
           />
@@ -515,7 +517,7 @@ const RenovationPackages = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
               {beforeAfterImages.map((images, index) => (
-                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group">
+                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group h-64 md:h-80">
                   {/* Before Image */}
                   <img 
                     src={images.before} 

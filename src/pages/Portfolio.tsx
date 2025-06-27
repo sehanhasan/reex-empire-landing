@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, Play } from "lucide-react";
+import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
 
 const Portfolio = () => {
@@ -14,10 +14,21 @@ const Portfolio = () => {
     type: string;
     src: string;
   } | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Auto hide language selector on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const content = {
@@ -106,6 +117,8 @@ const Portfolio = () => {
     type: string;
     src: string;
   }) => {
+    const index = filteredItems.findIndex(item => item.src === media.src && item.type === media.type);
+    setCurrentIndex(index);
     setSelectedMedia(media);
     setLightboxOpen(true);
   };
@@ -113,6 +126,18 @@ const Portfolio = () => {
   const closeLightbox = () => {
     setLightboxOpen(false);
     setSelectedMedia(null);
+  };
+
+  const nextImage = () => {
+    const nextIndex = (currentIndex + 1) % filteredItems.length;
+    setCurrentIndex(nextIndex);
+    setSelectedMedia(filteredItems[nextIndex]);
+  };
+
+  const prevImage = () => {
+    const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
+    setCurrentIndex(prevIndex);
+    setSelectedMedia(filteredItems[prevIndex]);
   };
 
   return <div className="min-h-screen bg-gray-50">
@@ -126,8 +151,8 @@ const Portfolio = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Language Toggle */}
-      <div className="fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
+      {/* Language Toggle - Auto hide on scroll */}
+      <div className={`fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="flex gap-2">
           <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 English
@@ -150,7 +175,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
+      {/* Filter Section - Fixed positioning */}
       <section className="py-12 bg-white sticky top-16 z-40 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
@@ -197,7 +222,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox with Navigation */}
       <Dialog open={lightboxOpen} onOpenChange={closeLightbox}>
         <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95 border-none">
           {selectedMedia && <div className="relative w-full h-[90vh] flex items-center justify-center">
@@ -205,9 +230,40 @@ const Portfolio = () => {
                 <X className="h-6 w-6 text-white" />
               </button>
               
+              {/* Previous Button */}
+              {filteredItems.length > 1 && (
+                <button 
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6 text-white" />
+                </button>
+              )}
+              
+              {/* Next Button */}
+              {filteredItems.length > 1 && (
+                <button 
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6 text-white" />
+                </button>
+              )}
+              
               {selectedMedia.type === 'image' ? <img src={selectedMedia.src} alt="Portfolio item" className="max-w-full max-h-full object-contain" /> : <div className="w-full max-w-4xl aspect-video">
                   <iframe src={selectedMedia.src} className="w-full h-full" title="Portfolio video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>}
+                
+              {/* Image Counter */}
+              {filteredItems.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+                  <span className="text-white text-sm">
+                    {currentIndex + 1} / {filteredItems.length}
+                  </span>
+                </div>
+              )}
             </div>}
         </DialogContent>
       </Dialog>
