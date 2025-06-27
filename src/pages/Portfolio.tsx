@@ -1,11 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
-
 const Portfolio = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [activeFilter, setActiveFilter] = useState('All');
@@ -30,7 +28,6 @@ const Portfolio = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const content = {
     en: {
       title: "Our Portfolio",
@@ -43,10 +40,8 @@ const Portfolio = () => {
       filters: ['全部', '一房', '两房', '顶层公寓']
     }
   };
-
   const currentContent = content[language];
   const filters = currentContent.filters;
-  
   const portfolioItems = [{
     type: 'image',
     src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png",
@@ -96,10 +91,11 @@ const Portfolio = () => {
     src: "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png",
     category: 'Pent House'
   }];
-
   const getFilteredItems = () => {
     if (language === 'zh') {
-      const filterMap: { [key: string]: string } = {
+      const filterMap: {
+        [key: string]: string;
+      } = {
         '全部': 'All',
         '一房': 'One-Bed',
         '两房': 'Two-Bed',
@@ -110,9 +106,7 @@ const Portfolio = () => {
     }
     return activeFilter === 'All' ? portfolioItems : portfolioItems.filter(item => item.category === activeFilter);
   };
-
   const filteredItems = getFilteredItems();
-
   const openLightbox = (media: {
     type: string;
     src: string;
@@ -122,24 +116,20 @@ const Portfolio = () => {
     setSelectedMedia(media);
     setLightboxOpen(true);
   };
-
   const closeLightbox = () => {
     setLightboxOpen(false);
     setSelectedMedia(null);
   };
-
   const nextImage = () => {
     const nextIndex = (currentIndex + 1) % filteredItems.length;
     setCurrentIndex(nextIndex);
     setSelectedMedia(filteredItems[nextIndex]);
   };
-
   const prevImage = () => {
     const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
     setCurrentIndex(prevIndex);
     setSelectedMedia(filteredItems[prevIndex]);
   };
-
   return <div className="min-h-screen bg-gray-50">
       <Helmet>
         <title>Portfolio - Renovation Projects Gallery</title>
@@ -176,7 +166,7 @@ const Portfolio = () => {
       </section>
 
       {/* Filter Section - Fixed positioning */}
-      <section className="py-12 bg-white sticky top-16 z-40 shadow-sm">
+      <section className="bg-white sticky top-16 z-40 shadow-sm py-[24px]">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
             {filters.map(filter => <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-6 py-2">
@@ -231,43 +221,28 @@ const Portfolio = () => {
               </button>
               
               {/* Previous Button */}
-              {filteredItems.length > 1 && (
-                <button 
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
-                  aria-label="Previous image"
-                >
+              {filteredItems.length > 1 && <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Previous image">
                   <ChevronLeft className="h-6 w-6 text-white" />
-                </button>
-              )}
+                </button>}
               
               {/* Next Button */}
-              {filteredItems.length > 1 && (
-                <button 
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
-                  aria-label="Next image"
-                >
+              {filteredItems.length > 1 && <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Next image">
                   <ChevronRight className="h-6 w-6 text-white" />
-                </button>
-              )}
+                </button>}
               
               {selectedMedia.type === 'image' ? <img src={selectedMedia.src} alt="Portfolio item" className="max-w-full max-h-full object-contain" /> : <div className="w-full max-w-4xl aspect-video">
                   <iframe src={selectedMedia.src} className="w-full h-full" title="Portfolio video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>}
                 
               {/* Image Counter */}
-              {filteredItems.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+              {filteredItems.length > 1 && <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
                   <span className="text-white text-sm">
                     {currentIndex + 1} / {filteredItems.length}
                   </span>
-                </div>
-              )}
+                </div>}
             </div>}
         </DialogContent>
       </Dialog>
     </div>;
 };
-
 export default Portfolio;
