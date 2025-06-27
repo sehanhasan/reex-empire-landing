@@ -11,6 +11,7 @@ import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import Index from "./pages/Index";
 import RenovationPackages from "./pages/RenovationPackages";
+import Portfolio from "./pages/Portfolio";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/renovation-packages" element={<RenovationPackages />} />
+              <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/services/:serviceId" element={
                 <>
                   <ServiceDetail />

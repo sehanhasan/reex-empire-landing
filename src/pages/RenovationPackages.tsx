@@ -1,16 +1,19 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X } from "lucide-react";
+import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X, Play } from "lucide-react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [isScrolled, setIsScrolled] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState<{[key: number]: number}>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +49,8 @@ const RenovationPackages = () => {
       },
       gallery: {
         title: "Renovation Gallery",
-        subtitle: "Stunning transformations from our recent projects"
+        subtitle: "Stunning transformations from our recent projects",
+        viewMore: "View More"
       },
       flexibleOptions: {
         title: "Your Property, Your Choice After 2 Years",
@@ -109,7 +113,8 @@ const RenovationPackages = () => {
       },
       gallery: {
         title: "装修画廊",
-        subtitle: "我们最近项目的惊人改造"
+        subtitle: "我们最近项目的惊人改造",
+        viewMore: "查看更多"
       },
       flexibleOptions: {
         title: "2年后您的房产，您的选择",
@@ -129,11 +134,11 @@ const RenovationPackages = () => {
       },
       selling: {
         title: "合约期内想要出售？", 
-        year1Label: "第1年出售",
+        year1Label: "第1年",
         year1: "第1年出售：需支付100%装修费用",
-        year2Label: "第2年出售",
+        year2Label: "第2年",
         year2: "第2年出售：需支付50%装修费用", 
-        afterLabel: "2年后出售",
+        afterLabel: "2年后",
         after: "2年后出售：完全免费！"
       },
       beforeAfter: {
@@ -157,17 +162,24 @@ const RenovationPackages = () => {
   };
 
   const beforeAfterImages = [{
-    before: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
+    before: "/lovable-uploads/51d1dd55-bbe0-4e8b-8518-bf72e6605062.png",
     after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
   }, {
     before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
   }];
 
-  const renovationGallery = ["/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png", "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png", "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png", "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png", "/lovable-uploads/01109413-abf6-408c-a8f9-a95692e74fba.png", "/lovable-uploads/802cfdac-e630-4a4b-b418-f5e9cb90e2fb.png", "/lovable-uploads/34c2ea63-c800-4cbc-a195-0b57234324fd.png", "/lovable-uploads/bfc580ff-b54e-4e4b-9d54-d23d39c09e3b.png", "/lovable-uploads/61e53e22-79b7-4fdd-bbef-15d6b2d36da6.png"];
+  const renovationMedia = [
+    { type: 'image', src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png" },
+    { type: 'video', src: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+    { type: 'image', src: "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png" },
+    { type: 'video', src: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+    { type: 'image', src: "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png" },
+    { type: 'image', src: "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png" }
+  ];
 
   // Show only 6 images on mobile
-  const displayGallery = window.innerWidth < 768 ? renovationGallery.slice(0, 6) : renovationGallery;
+  const displayMedia = window.innerWidth < 768 ? renovationMedia.slice(0, 6) : renovationMedia;
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -179,11 +191,25 @@ const RenovationPackages = () => {
   };
 
   const nextImage = () => {
-    setLightboxIndex((prev) => (prev + 1) % displayGallery.length);
+    setLightboxIndex((prev) => (prev + 1) % displayMedia.length);
   };
 
   const prevImage = () => {
-    setLightboxIndex((prev) => (prev - 1 + displayGallery.length) % displayGallery.length);
+    setLightboxIndex((prev) => (prev - 1 + displayMedia.length) % displayMedia.length);
+  };
+
+  const nextSlide = (imageIndex: number) => {
+    setCurrentSlide(prev => ({
+      ...prev,
+      [imageIndex]: prev[imageIndex] === 0 ? 1 : 0
+    }));
+  };
+
+  const prevSlide = (imageIndex: number) => {
+    setCurrentSlide(prev => ({
+      ...prev,
+      [imageIndex]: prev[imageIndex] === 1 ? 0 : 1
+    }));
   };
 
   useEffect(() => {
@@ -228,11 +254,17 @@ const RenovationPackages = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white">
-        <div style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80')"
-      }} className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" />
+      {/* Hero Section with YouTube Background */}
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playlist=dQw4w9WgXcQ"
+            className="w-full h-full object-cover scale-125"
+            allow="autoplay; encrypted-media"
+            title="Hero Background Video"
+          />
+          <div className="absolute inset-0 bg-[#0D66B3]/70"></div>
+        </div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 font-eurostile" style={{
           fontFamily: "'Eurostile', 'Arial', sans-serif"
@@ -280,28 +312,57 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Renovation Gallery Section */}
+      {/* Renovation Gallery Section with YouTube Videos */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
               {currentContent.gallery.title}
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 mb-6">
               {currentContent.gallery.subtitle}
             </p>
           </div>
           
           {/* Mobile Responsive Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {displayGallery.map((image, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" onClick={() => openLightbox(index)}>
-                <img src={image} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                  <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click to view
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+            {displayMedia.map((media, index) => (
+              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                {media.type === 'image' ? (
+                  <div className="cursor-pointer" onClick={() => openLightbox(index)}>
+                    <img src={media.src} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                      <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        Click to view
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>)}
+                ) : (
+                  <div className="relative h-64 sm:h-72 lg:h-80">
+                    <iframe 
+                      src={media.src} 
+                      className="w-full h-full"
+                      title={`Renovation Video ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                    <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs">
+                      <Play className="w-3 h-3 inline mr-1" />
+                      Video
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link to="/portfolio">
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
+                {currentContent.gallery.viewMore}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -317,13 +378,26 @@ const RenovationPackages = () => {
               <X size={32} />
             </button>
             
-            <img
-              src={displayGallery[lightboxIndex]}
-              alt={`Renovation ${lightboxIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
-            />
+            {displayMedia[lightboxIndex]?.type === 'image' ? (
+              <img
+                src={displayMedia[lightboxIndex].src}
+                alt={`Renovation ${lightboxIndex + 1}`}
+                className="max-w-full max-h-full object-contain"
+              />
+            ) : (
+              <div className="w-full h-96">
+                <iframe 
+                  src={displayMedia[lightboxIndex]?.src} 
+                  className="w-full h-full"
+                  title={`Renovation Video ${lightboxIndex + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            )}
             
-            {displayGallery.length > 1 && (
+            {displayMedia.length > 1 && (
               <>
                 <button
                   onClick={prevImage}
@@ -341,7 +415,7 @@ const RenovationPackages = () => {
             )}
             
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
-              {lightboxIndex + 1} / {displayGallery.length}
+              {lightboxIndex + 1} / {displayMedia.length}
             </div>
           </div>
         </div>
@@ -402,8 +476,8 @@ const RenovationPackages = () => {
                     <span className="text-2xl font-bold text-red-600">1</span>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
-                    <h3 className="text-lg font-bold text-white mb-2">Year 1</h3>
-                    <p className="text-white/90 text-base">Pay 100% renovation cost</p>
+                    <h3 className="text-lg font-bold text-white mb-2">{currentContent.selling.year1Label}</h3>
+                    <p className="text-white/90 text-base">{language === 'en' ? 'Pay 100% renovation cost' : '需支付100%装修费用'}</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-300 rounded-full opacity-50 animate-pulse"></div>
                 </div>
@@ -415,8 +489,8 @@ const RenovationPackages = () => {
                     <span className="text-2xl font-bold text-orange-600">2</span>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
-                    <h3 className="text-lg font-bold text-white mb-2">Year 2</h3>
-                    <p className="text-white/90 text-base">Pay 50% renovation cost</p>
+                    <h3 className="text-lg font-bold text-white mb-2">{currentContent.selling.year2Label}</h3>
+                    <p className="text-white/90 text-base">{language === 'en' ? 'Pay 50% renovation cost' : '需支付50%装修费用'}</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full opacity-50 animate-pulse"></div>
                 </div>
@@ -428,8 +502,8 @@ const RenovationPackages = () => {
                     <span className="text-2xl font-bold text-green-600">2+</span>
                   </div>
                   <div className="bg-white/10 backdrop-blur rounded-lg p-4 mb-4">
-                    <h3 className="text-lg font-bold text-white mb-2">After 2 Years</h3>
-                    <p className="text-white/90 text-base">Completely FREE!</p>
+                    <h3 className="text-lg font-bold text-white mb-2">{currentContent.selling.afterLabel}</h3>
+                    <p className="text-white/90 text-base">{language === 'en' ? 'Completely FREE!' : '完全免费！'}</p>
                   </div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-300 rounded-full opacity-50 animate-pulse"></div>
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-emerald-400 rounded-full opacity-70"></div>
@@ -440,39 +514,62 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Before & After Section with In-Image Slider */}
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             {currentContent.beforeAfter.title}
           </h2>
           <div className="max-w-4xl mx-auto">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {beforeAfterImages.map((images, index) => <CarouselItem key={index}>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="relative">
-                        <img src={images.before} alt="Before renovation" className="w-full h-64 object-cover rounded-lg" />
-                        <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {language === 'en' ? 'Before' : '装修前'}
-                        </div>
-                      </div>
-                      <div className="relative">
-                        <img src={images.after} alt="After renovation" className="w-full h-64 object-cover rounded-lg" />
-                        <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {language === 'en' ? 'After' : '装修后'}
-                        </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {beforeAfterImages.map((images, index) => (
+                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group">
+                  <div className="relative h-80 w-full">
+                    <img 
+                      src={currentSlide[index] === 1 ? images.after : images.before} 
+                      alt={currentSlide[index] === 1 ? "After renovation" : "Before renovation"} 
+                      className="w-full h-full object-cover transition-all duration-500" 
+                    />
+                    
+                    {/* Navigation arrows */}
+                    <button
+                      onClick={() => prevSlide(index)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors text-white"
+                    >
+                      ‹
+                    </button>
+                    <button
+                      onClick={() => nextSlide(index)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors text-white"
+                    >
+                      ›
+                    </button>
+                    
+                    {/* Label */}
+                    <div className="absolute top-4 left-4">
+                      <div className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
+                        currentSlide[index] === 1 ? 'bg-green-500' : 'bg-red-500'
+                      }`}>
+                        {currentSlide[index] === 1 
+                          ? (language === 'en' ? 'After' : '装修后')
+                          : (language === 'en' ? 'Before' : '装修前')
+                        }
                       </div>
                     </div>
-                  </CarouselItem>)}
-              </CarouselContent>
-              <div className="flex justify-center gap-2 mt-4 md:hidden">
-                <CarouselPrevious className="relative left-0 top-0 translate-y-0" />
-                <CarouselNext className="relative right-0 top-0 translate-y-0" />
-              </div>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
-            </Carousel>
+                    
+                    {/* Dots indicator */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      <div className={`w-2 h-2 rounded-full transition-colors ${
+                        currentSlide[index] !== 1 ? 'bg-white' : 'bg-white/50'
+                      }`} />
+                      <div className={`w-2 h-2 rounded-full transition-colors ${
+                        currentSlide[index] === 1 ? 'bg-white' : 'bg-white/50'
+                      }`} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
