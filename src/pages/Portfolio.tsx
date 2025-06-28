@@ -187,7 +187,7 @@ const Portfolio = () => {
       </div> */}
 
       {/* New Language Toggle - Mobile (Bottom Right) */}
-      <div className="md:hidden fixed bottom-6 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
+      <div className="md:hidden fixed bottom-6 left-4 z-50 bg-white rounded-lg shadow-lg p-2">
         <div className="flex gap-2">
           <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 EN
