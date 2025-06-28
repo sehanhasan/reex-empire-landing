@@ -165,11 +165,11 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Filter Section - Fixed positioning */}
+      {/* Filter Section - Fixed positioning with single row layout */}
       <section className="bg-white sticky top-16 z-40 shadow-sm py-[24px]">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            {filters.map(filter => <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-6 py-2">
+          <div className="flex justify-center gap-2 md:gap-4 overflow-x-auto pb-2">
+            {filters.map(filter => <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-3 md:px-6 py-2 text-sm md:text-base whitespace-nowrap flex-shrink-0">
                 {filter}
               </Button>)}
           </div>

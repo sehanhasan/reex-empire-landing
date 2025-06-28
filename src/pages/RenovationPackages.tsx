@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X, Play } from "lucide-react";
+import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
@@ -72,7 +71,7 @@ const RenovationPackages = () => {
         title: "Want to Sell During the Contract?",
         year1Label: "Year 1",
         year1: "Sell in Year 1: Pay 100% of renovation cost",
-        year2Label: "Year 2",
+        year2Label: "Year 2", 
         year2: "Sell in Year 2: Pay 50%",
         afterLabel: "After 2 Years", 
         after: "After 2 Years: Free!"
@@ -235,8 +234,8 @@ const RenovationPackages = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Language Toggle - Hidden on scroll */}
-      <div className={`fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      {/* Language Toggle - Desktop */}
+      <div className={`hidden md:block fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="flex gap-2">
           <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 English
@@ -247,18 +246,27 @@ const RenovationPackages = () => {
         </div>
       </div>
 
-      {/* Hero Section with YouTube Background */}
-      <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-r from-[#0D66B3]/90 to-[#0D66B3] text-white overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <iframe
-            src="https://www.youtube.com/embed/oz7wmF51Gwk?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playlist=oz7wmF51Gwk"
-            className="w-full h-full object-cover"
-            style={{ minHeight: '70vh' }}
-            allow="autoplay; encrypted-media"
-            title="Hero Background Video"
-          />
-          <div className="absolute inset-0 bg-[#0D66B3]/70"></div>
+      {/* Language Toggle - Mobile (Bottom Left) */}
+      <div className="md:hidden fixed bottom-20 left-4 z-50 bg-white rounded-lg shadow-lg p-2">
+        <div className="flex gap-2">
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
+            🇬🇧 EN
+          </Button>
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
+            🇨🇳 中文
+          </Button>
         </div>
+      </div>
+
+      {/* Hero Section with Parallax Image Background */}
+      <section className="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1920&q=80")',
+          }}
+        />
+        <div className="absolute inset-0 bg-[#0D66B3]/70"></div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 font-eurostile" style={{
           fontFamily: "'Eurostile', 'Arial', sans-serif"
@@ -361,16 +369,39 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox with Navigation */}
       {lightboxOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full">
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+              className="absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+              aria-label="Close fullscreen view"
             >
-              <X size={32} />
+              <X className="h-6 w-6 text-white" />
             </button>
+            
+            {/* Previous Button */}
+            {displayMedia.length > 1 && (
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6 text-white" />
+              </button>
+            )}
+            
+            {/* Next Button */}
+            {displayMedia.length > 1 && (
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6 text-white" />
+              </button>
+            )}
             
             {displayMedia[lightboxIndex]?.type === 'image' ? (
               <img
@@ -391,26 +422,14 @@ const RenovationPackages = () => {
               </div>
             )}
             
+            {/* Image Counter */}
             {displayMedia.length > 1 && (
-              <>
-                <button
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-4xl"
-                >
-                  ‹
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 text-4xl"
-                >
-                  ›
-                </button>
-              </>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+                <span className="text-white text-sm">
+                  {lightboxIndex + 1} / {displayMedia.length}
+                </span>
+              </div>
             )}
-            
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
-              {lightboxIndex + 1} / {displayMedia.length}
-            </div>
           </div>
         </div>
       )}
@@ -508,7 +527,7 @@ const RenovationPackages = () => {
         </div>
       </section>
 
-      {/* Before & After Section with Comparison Slider */}
+      {/* Before & After Section with Improved Comparison Slider */}
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -539,7 +558,7 @@ const RenovationPackages = () => {
                     />
                   </div>
                   
-                  {/* Slider */}
+                  {/* Enhanced Slider with larger touch area */}
                   <div className="absolute inset-0 flex items-center">
                     <input
                       type="range"
@@ -547,11 +566,12 @@ const RenovationPackages = () => {
                       max="100"
                       value={beforeAfterSliders[index] || 50}
                       onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                      className="w-full h-full opacity-0 cursor-pointer z-10"
+                      className="w-full h-full opacity-0 cursor-pointer z-10 touch-manipulation"
+                      style={{ padding: '20px 0' }}
                     />
                   </div>
                   
-                  {/* Divider Line */}
+                  {/* Divider with Chevron Icons */}
                   <div 
                     className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20 pointer-events-none"
                     style={{
@@ -559,8 +579,9 @@ const RenovationPackages = () => {
                       transform: 'translateX(-50%)'
                     }}
                   >
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-                      <div className="w-4 h-4 border-l-2 border-r-2 border-gray-600"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
+                      <ChevronLeft className="w-4 h-4 text-gray-600 -ml-1" />
+                      <ChevronRight className="w-4 h-4 text-gray-600 -mr-1" />
                     </div>
                   </div>
                   
