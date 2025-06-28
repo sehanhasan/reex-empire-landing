@@ -6,6 +6,7 @@ import { Services } from "@/components/Services";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Contact } from "@/components/Contact";
 import { Specialization } from "@/components/Specialization";
+import { WelcomePopup } from "@/components/WelcomePopup";
 
 const Index = () => {
   // Scroll to top when component mounts
@@ -15,6 +16,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <WelcomePopup />
       <Hero />
       <About />
       <Specialization />

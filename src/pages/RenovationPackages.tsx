@@ -6,6 +6,10 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import { RenovationHero } from "@/components/renovation/RenovationHero";
+import { LanguageToggle } from "@/components/renovation/LanguageToggle";
+import { BeforeAfterComparison } from "@/components/renovation/BeforeAfterComparison";
+
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,6 +18,7 @@ const RenovationPackages = () => {
   const [beforeAfterSliders, setBeforeAfterSliders] = useState<{
     [key: number]: number;
   }>({});
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -21,6 +26,7 @@ const RenovationPackages = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const content = {
     en: {
       hero: {
@@ -151,19 +157,15 @@ const RenovationPackages = () => {
       }
     }
   };
+
   const currentContent = content[language];
+
   const handleWhatsAppContact = () => {
     const phoneNumber = "601116656525";
     const message = encodeURIComponent("Hi, I'm interested in your renovation packages.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
-  const beforeAfterImages = [{
-    before: "/lovable-uploads/51d1dd55-bbe0-4e8b-8518-bf72e6605062.png",
-    after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
-  }, {
-    before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
-    after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
-  }];
+
   const renovationMedia = [{
     type: 'image',
     src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png"
@@ -184,27 +186,25 @@ const RenovationPackages = () => {
     src: "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png"
   }];
 
-  // Show only 6 images on mobile
   const displayMedia = window.innerWidth < 768 ? renovationMedia.slice(0, 6) : renovationMedia;
+
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
     setLightboxOpen(true);
   };
+
   const closeLightbox = () => {
     setLightboxOpen(false);
   };
+
   const nextImage = () => {
     setLightboxIndex(prev => (prev + 1) % displayMedia.length);
   };
+
   const prevImage = () => {
     setLightboxIndex(prev => (prev - 1 + displayMedia.length) % displayMedia.length);
   };
-  const handleSliderChange = (imageIndex: number, value: number) => {
-    setBeforeAfterSliders(prev => ({
-      ...prev,
-      [imageIndex]: value
-    }));
-  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
@@ -219,9 +219,11 @@ const RenovationPackages = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen]);
-  return <div className="min-h-screen font-eurostile" style={{
-    fontFamily: "'Eurostile', 'Arial', sans-serif"
-  }}>
+
+  return (
+    <div className="min-h-screen font-eurostile" style={{
+      fontFamily: "'Eurostile', 'Arial', sans-serif"
+    }}>
       <Helmet>
         <title>Renovation Packages - Property Renovation Services</title>
         <meta name="description" content="Upgrade your property with zero cost renovation packages. Full interior renovation with high-end furnishings included." />
@@ -232,64 +234,9 @@ const RenovationPackages = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Language Toggle - Desktop */}
-      <div className={`hidden md:block fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <div className="flex gap-2">
-          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
-            🇬🇧 English
-          </Button>
-          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
-            🇨🇳 中文
-          </Button>
-        </div>
-      </div>
+      <LanguageToggle language={language} setLanguage={setLanguage} isScrolled={isScrolled} />
 
-      {/* Language Toggle - Mobile (Bottom Left) */}
-      <div className="md:hidden fixed bottom-6 left-4 z-50 bg-white rounded-lg shadow-lg p-2">
-        <div className="flex gap-2">
-          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
-            🇬🇧 EN
-          </Button>
-          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
-            🇨🇳 中文
-          </Button>
-        </div>
-      </div>
-
-      {/* Hero Section with Parallax Image Background */}
-      <section className="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed" style={{
-        backgroundImage: 'url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1920&q=80")'
-      }} />
-        <div className="absolute inset-0 bg-[#0D66B3]/80"></div>
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 font-eurostile" style={{
-          fontFamily: "'Eurostile', 'Arial', sans-serif"
-        }}>
-            {currentContent.hero.title}
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white/90">
-            {currentContent.hero.subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-[#0D66B3] hover:bg-white/90" onClick={handleWhatsAppContact}>
-              {currentContent.hero.cta1}
-            </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#0D66B3] bg-transparent">
-                  {currentContent.hero.cta2}
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl w-full">
-                <div className="aspect-video">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oz7wmF51Gwk" title="Renovation Transformation" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </div>
-      </section>
+      <RenovationHero content={currentContent} onContactClick={handleWhatsAppContact} />
 
       {/* What's Included Section */}
       <section className="py-20 bg-white">
@@ -298,13 +245,15 @@ const RenovationPackages = () => {
             {currentContent.whatsIncluded.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {currentContent.whatsIncluded.items.map((item, index) => <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
+            {currentContent.whatsIncluded.items.map((item, index) => (
+              <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-8">
                   <item.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                   <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -323,22 +272,39 @@ const RenovationPackages = () => {
           
           {/* Mobile Responsive Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
-            {displayMedia.map((media, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                {media.type === 'image' ? <div className="cursor-pointer" onClick={() => openLightbox(index)}>
-                    <img src={media.src} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
+            {displayMedia.map((media, index) => (
+              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                {media.type === 'image' ? (
+                  <div className="cursor-pointer" onClick={() => openLightbox(index)}>
+                    <img
+                      src={media.src}
+                      alt={`Renovation ${index + 1}`}
+                      className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                       <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                         Click to view
                       </div>
                     </div>
-                  </div> : <div className="relative h-64 sm:h-72 lg:h-80">
-                    <iframe src={media.src} className="w-full h-full" title={`Renovation Video ${index + 1}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                  </div>
+                ) : (
+                  <div className="relative h-64 sm:h-72 lg:h-80">
+                    <iframe
+                      src={media.src}
+                      className="w-full h-full"
+                      title={`Renovation Video ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                     <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs">
                       <Play className="w-3 h-3 inline mr-1" />
                       Video
                     </div>
-                  </div>}
-              </div>)}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="text-center">
@@ -352,34 +318,69 @@ const RenovationPackages = () => {
       </section>
 
       {/* Lightbox with Navigation */}
-      {lightboxOpen && <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+      {lightboxOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full">
-            <button onClick={closeLightbox} className="absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Close fullscreen view">
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+              aria-label="Close fullscreen view"
+            >
               <X className="h-6 w-6 text-white" />
             </button>
             
             {/* Previous Button */}
-            {displayMedia.length > 1 && <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Previous image">
+            {displayMedia.length > 1 && (
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Previous image"
+              >
                 <ChevronLeft className="h-6 w-6 text-white" />
-              </button>}
+              </button>
+            )}
             
             {/* Next Button */}
-            {displayMedia.length > 1 && <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Next image">
+            {displayMedia.length > 1 && (
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Next image"
+              >
                 <ChevronRight className="h-6 w-6 text-white" />
-              </button>}
+              </button>
+            )}
             
-            {displayMedia[lightboxIndex]?.type === 'image' ? <img src={displayMedia[lightboxIndex].src} alt={`Renovation ${lightboxIndex + 1}`} className="max-w-full max-h-full object-contain" /> : <div className="w-full h-96">
-                <iframe src={displayMedia[lightboxIndex]?.src} className="w-full h-full" title={`Renovation Video ${lightboxIndex + 1}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-              </div>}
+            {displayMedia[lightboxIndex]?.type === 'image' ? (
+              <img
+                src={displayMedia[lightboxIndex].src}
+                alt={`Renovation ${lightboxIndex + 1}`}
+                className="max-w-full max-h-full object-contain"
+              />
+            ) : (
+              <div className="w-full h-96">
+                <iframe
+                  src={displayMedia[lightboxIndex]?.src}
+                  className="w-full h-full"
+                  title={`Renovation Video ${lightboxIndex + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            )}
             
             {/* Image Counter */}
-            {displayMedia.length > 1 && <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+            {displayMedia.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
                 <span className="text-white text-sm">
                   {lightboxIndex + 1} / {displayMedia.length}
                 </span>
-              </div>}
+              </div>
+            )}
           </div>
-        </div>}
+        </div>
+      )}
 
       {/* Flexible Options Section */}
       <section className="py-20 bg-secondary bg-sky-100">
@@ -475,58 +476,8 @@ const RenovationPackages = () => {
       </section>
 
       {/* Before & After Section with Improved Comparison Slider */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            {currentContent.beforeAfter.title}
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
-              {beforeAfterImages.map((images, index) => <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group h-64 md:h-80">
-                  {/* Before Image */}
-                  <img src={images.before} alt="Before renovation" className="absolute inset-0 w-full h-full object-cover" />
-                  
-                  {/* After Image with clip-path */}
-                  <div className="absolute inset-0 overflow-hidden" style={{
-                clipPath: `inset(0 ${100 - (beforeAfterSliders[index] || 50)}% 0 0)`
-              }}>
-                    <img src={images.after} alt="After renovation" className="w-full h-full object-cover" />
-                  </div>
-                  
-                  {/* Enhanced Slider with larger touch area */}
-                  <div className="absolute inset-0 flex items-center">
-                    <input type="range" min="0" max="100" value={beforeAfterSliders[index] || 50} onChange={e => handleSliderChange(index, parseInt(e.target.value))} className="w-full h-full opacity-0 cursor-pointer z-10 touch-manipulation" style={{
-                  padding: '20px 0'
-                }} />
-                  </div>
-                  
-                  {/* Divider with Chevron Icons */}
-                  <div className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20 pointer-events-none" style={{
-                left: `${beforeAfterSliders[index] || 50}%`,
-                transform: 'translateX(-50%)'
-              }}>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
-                      <ChevronLeft className="w-4 h-4 text-gray-600 -ml-1" />
-                      <ChevronRight className="w-4 h-4 text-gray-600 -mr-1" />
-                    </div>
-                  </div>
-                  
-                  {/* Labels */}
-                  <div className="absolute top-4 left-4">
-                    <div className="px-3 py-1 rounded-full text-sm font-semibold text-white bg-red-500">
-                      {language === 'en' ? 'Before' : '装修前'}
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <div className="px-3 py-1 rounded-full text-sm font-semibold text-white bg-green-500">
-                      {language === 'en' ? 'After' : '装修后'}
-                    </div>
-                  </div>
-                </div>)}
-            </div>
-          </div>
-        </div>
-      </section>
+      
+      <BeforeAfterComparison content={currentContent} language={language} />
 
       {/* Video Showcase */}
       <section className="py-20 bg-white">
@@ -553,6 +504,8 @@ const RenovationPackages = () => {
           </Button>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default RenovationPackages;

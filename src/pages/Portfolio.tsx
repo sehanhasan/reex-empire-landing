@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
+
 const Portfolio = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [activeFilter, setActiveFilter] = useState('All');
@@ -14,20 +15,38 @@ const Portfolio = () => {
   } | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Auto hide language selector on scroll
+  // Auto hide language selector on scroll and handle top bar visibility
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      const currentScrollY = window.scrollY;
+      
+      // Language selector visibility
+      setIsScrolled(currentScrollY > 100);
+      
+      // Top bar visibility based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        setShowTopBar(false);
+      } else {
+        // Scrolling up
+        setShowTopBar(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
+
   const content = {
     en: {
       title: "Our Portfolio",
@@ -130,7 +149,8 @@ const Portfolio = () => {
     setCurrentIndex(prevIndex);
     setSelectedMedia(filteredItems[prevIndex]);
   };
-  return <div className="min-h-screen bg-gray-50">
+  return (
+    <div className="min-h-screen bg-gray-50">
       <Helmet>
         <title>Portfolio - Renovation Projects Gallery</title>
         <meta name="description" content="Browse our complete portfolio of renovation projects including one-bedroom, two-bedroom, and penthouse transformations." />
@@ -141,8 +161,8 @@ const Portfolio = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Language Toggle - Auto hide on scroll */}
-      <div className={`fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      {/* Language Toggle - Desktop (Auto hide on scroll) */}
+      <div className={`hidden md:block fixed top-20 right-4 z-50 bg-white rounded-lg shadow-lg p-2 transition-all duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="flex gap-2">
           <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
             🇬🇧 English
@@ -153,8 +173,33 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="py-10 bg-gradient-to-r from-primary to-primary/80 text-white">
+      {/* Commented out the existing language toggle section */}
+      {/* Language Toggle - Mobile (Bottom Left) */}
+      {/* <div className="md:hidden fixed bottom-6 left-4 z-50 bg-white rounded-lg shadow-lg p-2">
+        <div className="flex gap-2">
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
+            🇬🇧 EN
+          </Button>
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
+            🇨🇳 中文
+          </Button>
+        </div>
+      </div> */}
+
+      {/* New Language Toggle - Mobile (Bottom Right) */}
+      <div className="md:hidden fixed bottom-6 right-4 z-50 bg-white rounded-lg shadow-lg p-2">
+        <div className="flex gap-2">
+          <Button variant={language === 'en' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('en')} className="text-xs">
+            🇬🇧 EN
+          </Button>
+          <Button variant={language === 'zh' ? 'default' : 'outline'} size="sm" onClick={() => setLanguage('zh')} className="text-xs">
+            🇨🇳 中文
+          </Button>
+        </div>
+      </div>
+
+      {/* Hero Section with dynamic top bar visibility */}
+      <section className={`py-10 bg-gradient-to-r from-primary to-primary/80 text-white transition-all duration-300 ${showTopBar ? 'mt-0' : '-mt-16'}`}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             {currentContent.title}
@@ -165,13 +210,15 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Filter Section - Fixed positioning with single row layout */}
+      {/* Filter Section - Keep sticky positioning */}
       <section className="bg-white sticky top-16 z-40 shadow-sm py-[24px]">
         <div className="container mx-auto px-4">
           <div className="flex justify-center gap-2 md:gap-4 overflow-x-auto pb-2">
-            {filters.map(filter => <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-3 md:px-6 py-2 text-sm md:text-base whitespace-nowrap flex-shrink-0">
+            {filters.map(filter => (
+              <Button key={filter} variant={activeFilter === filter ? 'default' : 'outline'} onClick={() => setActiveFilter(filter)} className="px-3 md:px-6 py-2 text-sm md:text-base whitespace-nowrap flex-shrink-0">
                 {filter}
-              </Button>)}
+              </Button>
+            ))}
           </div>
         </div>
       </section>
@@ -180,10 +227,16 @@ const Portfolio = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredItems.map((item, index) => <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
+            {filteredItems.map((item, index) => (
+              <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
                 <CardContent className="p-0">
-                  {item.type === 'image' ? <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(item)}>
-                      <img src={item.src} alt={`${item.category} renovation`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                  {item.type === 'image' ? (
+                    <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(item)}>
+                      <img
+                        src={item.src}
+                        alt={`${item.category} renovation`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
                       <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                         <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                           Click to view
@@ -192,8 +245,17 @@ const Portfolio = () => {
                       <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         {item.category}
                       </div>
-                    </div> : <div className="relative h-64" onClick={() => openLightbox(item)}>
-                      <iframe src={item.src} className="w-full h-full" title={`${item.category} renovation video`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                    </div>
+                  ) : (
+                    <div className="relative h-64" onClick={() => openLightbox(item)}>
+                      <iframe
+                        src={item.src}
+                        className="w-full h-full"
+                        title={`${item.category} renovation video`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
                       <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
                         <Play className="w-3 h-3" />
                         Video
@@ -201,48 +263,85 @@ const Portfolio = () => {
                       <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
                         {item.category}
                       </div>
-                    </div>}
+                    </div>
+                  )}
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
 
-          {filteredItems.length === 0 && <div className="text-center py-16">
+          {filteredItems.length === 0 && (
+            <div className="text-center py-16">
               <p className="text-gray-500 text-lg">No projects found for the selected filter.</p>
-            </div>}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Lightbox with Navigation */}
       <Dialog open={lightboxOpen} onOpenChange={closeLightbox}>
         <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95 border-none">
-          {selectedMedia && <div className="relative w-full h-[90vh] flex items-center justify-center">
-              <button onClick={closeLightbox} className="absolute right-4 top-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Close fullscreen view">
+          {selectedMedia && (
+            <div className="relative w-full h-[90vh] flex items-center justify-center">
+              <button
+                onClick={closeLightbox}
+                className="absolute right-4 top-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                aria-label="Close fullscreen view"
+              >
                 <X className="h-6 w-6 text-white" />
               </button>
               
               {/* Previous Button */}
-              {filteredItems.length > 1 && <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Previous image">
+              {filteredItems.length > 1 && (
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                  aria-label="Previous image"
+                >
                   <ChevronLeft className="h-6 w-6 text-white" />
-                </button>}
+                </button>
+              )}
               
               {/* Next Button */}
-              {filteredItems.length > 1 && <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Next image">
+              {filteredItems.length > 1 && (
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+                  aria-label="Next image"
+                >
                   <ChevronRight className="h-6 w-6 text-white" />
-                </button>}
+                </button>
+              )}
               
-              {selectedMedia.type === 'image' ? <img src={selectedMedia.src} alt="Portfolio item" className="max-w-full max-h-full object-contain" /> : <div className="w-full max-w-4xl aspect-video">
-                  <iframe src={selectedMedia.src} className="w-full h-full" title="Portfolio video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-                </div>}
+              {selectedMedia.type === 'image' ? (
+                <img src={selectedMedia.src} alt="Portfolio item" className="max-w-full max-h-full object-contain" />
+              ) : (
+                <div className="w-full max-w-4xl aspect-video">
+                  <iframe
+                    src={selectedMedia.src}
+                    className="w-full h-full"
+                    title="Portfolio video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              )}
                 
               {/* Image Counter */}
-              {filteredItems.length > 1 && <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+              {filteredItems.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
                   <span className="text-white text-sm">
                     {currentIndex + 1} / {filteredItems.length}
                   </span>
-                </div>}
-            </div>}
+                </div>
+              )}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
-    </div>;
+    </div>
+  );
 };
+
 export default Portfolio;
