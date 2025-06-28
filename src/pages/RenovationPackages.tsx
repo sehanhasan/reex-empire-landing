@@ -6,14 +6,14 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Home, Wrench, Calendar, Shield, DollarSign, Palette, X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-
 const RenovationPackages = () => {
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const [isScrolled, setIsScrolled] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [beforeAfterSliders, setBeforeAfterSliders] = useState<{[key: number]: number}>({});
-
+  const [beforeAfterSliders, setBeforeAfterSliders] = useState<{
+    [key: number]: number;
+  }>({});
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -21,7 +21,6 @@ const RenovationPackages = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const content = {
     en: {
       hero: {
@@ -71,9 +70,9 @@ const RenovationPackages = () => {
         title: "Want to Sell During the Contract?",
         year1Label: "Year 1",
         year1: "Sell in Year 1: Pay 100% of renovation cost",
-        year2Label: "Year 2", 
+        year2Label: "Year 2",
         year2: "Sell in Year 2: Pay 50%",
-        afterLabel: "After 2 Years", 
+        afterLabel: "After 2 Years",
         after: "After 2 Years: Free!"
       },
       beforeAfter: {
@@ -135,7 +134,7 @@ const RenovationPackages = () => {
         title: "合约期内想要出售？",
         year1Label: "第1年",
         year1: "第1年出售：需支付100%装修费用",
-        year2Label: "第2年", 
+        year2Label: "第2年",
         year2: "第2年出售：需支付50%装修费用",
         afterLabel: "2年后",
         after: "2年后出售：完全免费！"
@@ -152,14 +151,12 @@ const RenovationPackages = () => {
       }
     }
   };
-
   const currentContent = content[language];
   const handleWhatsAppContact = () => {
     const phoneNumber = "601116656525";
     const message = encodeURIComponent("Hi, I'm interested in your renovation packages.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
-
   const beforeAfterImages = [{
     before: "/lovable-uploads/51d1dd55-bbe0-4e8b-8518-bf72e6605062.png",
     after: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=800&q=80"
@@ -167,47 +164,50 @@ const RenovationPackages = () => {
     before: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
     after: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
   }];
-
-  const renovationMedia = [
-    { type: 'image', src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png" },
-    { type: 'video', src: "https://www.youtube.com/embed/oz7wmF51Gwk" },
-    { type: 'image', src: "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png" },
-    { type: 'video', src: "https://www.youtube.com/embed/oz7wmF51Gwk" },
-    { type: 'image', src: "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png" },
-    { type: 'image', src: "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png" }
-  ];
+  const renovationMedia = [{
+    type: 'image',
+    src: "/lovable-uploads/18b0e4ba-6209-40c0-bdf7-6d4d09286340.png"
+  }, {
+    type: 'video',
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk"
+  }, {
+    type: 'image',
+    src: "/lovable-uploads/e84471b0-c370-4c49-b243-76049cf4dd93.png"
+  }, {
+    type: 'video',
+    src: "https://www.youtube.com/embed/oz7wmF51Gwk"
+  }, {
+    type: 'image',
+    src: "/lovable-uploads/a33e644e-5a91-48a8-b761-c0e4a0c8c6ec.png"
+  }, {
+    type: 'image',
+    src: "/lovable-uploads/5c1674c9-7eda-4fc8-8f86-e8291c5fa1e1.png"
+  }];
 
   // Show only 6 images on mobile
   const displayMedia = window.innerWidth < 768 ? renovationMedia.slice(0, 6) : renovationMedia;
-
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
     setLightboxOpen(true);
   };
-
   const closeLightbox = () => {
     setLightboxOpen(false);
   };
-
   const nextImage = () => {
-    setLightboxIndex((prev) => (prev + 1) % displayMedia.length);
+    setLightboxIndex(prev => (prev + 1) % displayMedia.length);
   };
-
   const prevImage = () => {
-    setLightboxIndex((prev) => (prev - 1 + displayMedia.length) % displayMedia.length);
+    setLightboxIndex(prev => (prev - 1 + displayMedia.length) % displayMedia.length);
   };
-
   const handleSliderChange = (imageIndex: number, value: number) => {
     setBeforeAfterSliders(prev => ({
       ...prev,
       [imageIndex]: value
     }));
   };
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      
       if (e.key === 'Escape') {
         closeLightbox();
       } else if (e.key === 'ArrowRight') {
@@ -216,11 +216,9 @@ const RenovationPackages = () => {
         prevImage();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen]);
-
   return <div className="min-h-screen font-eurostile" style={{
     fontFamily: "'Eurostile', 'Arial', sans-serif"
   }}>
@@ -260,13 +258,10 @@ const RenovationPackages = () => {
 
       {/* Hero Section with Parallax Image Background */}
       <section className="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1920&q=80")',
-          }}
-        />
-        <div className="absolute inset-0 bg-[#0D66B3]/70"></div>
+        <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed" style={{
+        backgroundImage: 'url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1920&q=80")'
+      }} />
+        <div className="absolute inset-0 bg-[#0D66B3]/80"></div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 font-eurostile" style={{
           fontFamily: "'Eurostile', 'Arial', sans-serif"
@@ -328,35 +323,22 @@ const RenovationPackages = () => {
           
           {/* Mobile Responsive Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
-            {displayMedia.map((media, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                {media.type === 'image' ? (
-                  <div className="cursor-pointer" onClick={() => openLightbox(index)}>
+            {displayMedia.map((media, index) => <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                {media.type === 'image' ? <div className="cursor-pointer" onClick={() => openLightbox(index)}>
                     <img src={media.src} alt={`Renovation ${index + 1}`} className="w-full h-64 sm:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                       <div className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                         Click to view
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="relative h-64 sm:h-72 lg:h-80">
-                    <iframe 
-                      src={media.src} 
-                      className="w-full h-full"
-                      title={`Renovation Video ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                  </div> : <div className="relative h-64 sm:h-72 lg:h-80">
+                    <iframe src={media.src} className="w-full h-full" title={`Renovation Video ${index + 1}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                     <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs">
                       <Play className="w-3 h-3 inline mr-1" />
                       Video
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  </div>}
+              </div>)}
           </div>
 
           <div className="text-center">
@@ -370,69 +352,34 @@ const RenovationPackages = () => {
       </section>
 
       {/* Lightbox with Navigation */}
-      {lightboxOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+      {lightboxOpen && <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full">
-            <button
-              onClick={closeLightbox}
-              className="absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
-              aria-label="Close fullscreen view"
-            >
+            <button onClick={closeLightbox} className="absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Close fullscreen view">
               <X className="h-6 w-6 text-white" />
             </button>
             
             {/* Previous Button */}
-            {displayMedia.length > 1 && (
-              <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
-                aria-label="Previous image"
-              >
+            {displayMedia.length > 1 && <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Previous image">
                 <ChevronLeft className="h-6 w-6 text-white" />
-              </button>
-            )}
+              </button>}
             
             {/* Next Button */}
-            {displayMedia.length > 1 && (
-              <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
-                aria-label="Next image"
-              >
+            {displayMedia.length > 1 && <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors" aria-label="Next image">
                 <ChevronRight className="h-6 w-6 text-white" />
-              </button>
-            )}
+              </button>}
             
-            {displayMedia[lightboxIndex]?.type === 'image' ? (
-              <img
-                src={displayMedia[lightboxIndex].src}
-                alt={`Renovation ${lightboxIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
-              />
-            ) : (
-              <div className="w-full h-96">
-                <iframe 
-                  src={displayMedia[lightboxIndex]?.src} 
-                  className="w-full h-full"
-                  title={`Renovation Video ${lightboxIndex + 1}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            )}
+            {displayMedia[lightboxIndex]?.type === 'image' ? <img src={displayMedia[lightboxIndex].src} alt={`Renovation ${lightboxIndex + 1}`} className="max-w-full max-h-full object-contain" /> : <div className="w-full h-96">
+                <iframe src={displayMedia[lightboxIndex]?.src} className="w-full h-full" title={`Renovation Video ${lightboxIndex + 1}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              </div>}
             
             {/* Image Counter */}
-            {displayMedia.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+            {displayMedia.length > 1 && <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
                 <span className="text-white text-sm">
                   {lightboxIndex + 1} / {displayMedia.length}
                 </span>
-              </div>
-            )}
+              </div>}
           </div>
-        </div>
-      )}
+        </div>}
 
       {/* Flexible Options Section */}
       <section className="py-20 bg-secondary bg-sky-100">
@@ -535,50 +482,29 @@ const RenovationPackages = () => {
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              {beforeAfterImages.map((images, index) => (
-                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group h-64 md:h-80">
+              {beforeAfterImages.map((images, index) => <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group h-64 md:h-80">
                   {/* Before Image */}
-                  <img 
-                    src={images.before} 
-                    alt="Before renovation" 
-                    className="absolute inset-0 w-full h-full object-cover" 
-                  />
+                  <img src={images.before} alt="Before renovation" className="absolute inset-0 w-full h-full object-cover" />
                   
                   {/* After Image with clip-path */}
-                  <div 
-                    className="absolute inset-0 overflow-hidden"
-                    style={{
-                      clipPath: `inset(0 ${100 - (beforeAfterSliders[index] || 50)}% 0 0)`
-                    }}
-                  >
-                    <img 
-                      src={images.after} 
-                      alt="After renovation" 
-                      className="w-full h-full object-cover" 
-                    />
+                  <div className="absolute inset-0 overflow-hidden" style={{
+                clipPath: `inset(0 ${100 - (beforeAfterSliders[index] || 50)}% 0 0)`
+              }}>
+                    <img src={images.after} alt="After renovation" className="w-full h-full object-cover" />
                   </div>
                   
                   {/* Enhanced Slider with larger touch area */}
                   <div className="absolute inset-0 flex items-center">
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={beforeAfterSliders[index] || 50}
-                      onChange={(e) => handleSliderChange(index, parseInt(e.target.value))}
-                      className="w-full h-full opacity-0 cursor-pointer z-10 touch-manipulation"
-                      style={{ padding: '20px 0' }}
-                    />
+                    <input type="range" min="0" max="100" value={beforeAfterSliders[index] || 50} onChange={e => handleSliderChange(index, parseInt(e.target.value))} className="w-full h-full opacity-0 cursor-pointer z-10 touch-manipulation" style={{
+                  padding: '20px 0'
+                }} />
                   </div>
                   
                   {/* Divider with Chevron Icons */}
-                  <div 
-                    className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20 pointer-events-none"
-                    style={{
-                      left: `${beforeAfterSliders[index] || 50}%`,
-                      transform: 'translateX(-50%)'
-                    }}
-                  >
+                  <div className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20 pointer-events-none" style={{
+                left: `${beforeAfterSliders[index] || 50}%`,
+                transform: 'translateX(-50%)'
+              }}>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
                       <ChevronLeft className="w-4 h-4 text-gray-600 -ml-1" />
                       <ChevronRight className="w-4 h-4 text-gray-600 -mr-1" />
@@ -596,8 +522,7 @@ const RenovationPackages = () => {
                       {language === 'en' ? 'After' : '装修后'}
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
