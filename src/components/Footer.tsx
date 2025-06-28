@@ -1,8 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-
 export const Footer = () => {
-  return (
-    <footer className="bg-[#222222] text-white pt-16 pb-8">
+  return <footer className="bg-[#222222] text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div>
@@ -30,22 +28,13 @@ export const Footer = () => {
             </div>
           </div>
           <div className="flex justify-center items-center gap-4">
-            <img 
-              src="https://i.ibb.co/dbCdzJQ/best-price-badge.png" 
-              alt="Best Price Guaranteed"
-              className="max-w-[200px] h-auto"
-            />
-            <img 
-              src="https://tvsolutions.ie/wp-content/uploads/2018/12/guarantee.png" 
-              alt="100% Satisfaction Guaranteed"
-              className="max-w-[200px] h-auto"
-            />
+            <img src="https://i.ibb.co/dbCdzJQ/best-price-badge.png" alt="Best Price Guaranteed" className="max-w-[150px] h-auto" />
+            <img src="https://tvsolutions.ie/wp-content/uploads/2018/12/guarantee.png" alt="100% Satisfaction Guaranteed" className="max-w-[150px] h-auto" />
           </div>
         </div>
         <div className="border-t border-white/10 pt-8 text-center text-white/60">
           <p>&copy; 2025 Reex Empire. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
